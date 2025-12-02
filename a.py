@@ -86,8 +86,9 @@ def generate_chart(df, stock_code, output_file):
 
 if __name__ == "__main__":
     STOCK_CODE = "688027"
-    MD_FILE = "a.md"
-    PNG_FILE = "a.png"
+    today_str = datetime.date.today().strftime("%m%d")
+    MD_FILE = f"{today_str}.md"
+    PNG_FILE = f"{today_str}.png"
 
     print(f"Collecting (simulated) stock data for {STOCK_CODE}...")
     stock_data_df = get_stock_data_simulated(STOCK_CODE)
