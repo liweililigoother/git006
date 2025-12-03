@@ -21,7 +21,8 @@ def fetch_and_process_stock_data(stock_code="688027", num_trading_days=20):
         start_date_str = start_date_hist.strftime('%Y%m%d')
         end_date_str = end_date.strftime('%Y%m%d')
 
-        # Fetch historical daily data
+        # Fetch historical daily data. akshare automatically handles non-trading days (e.g., weekends, holidays),
+        # so the returned data will only include trading days.
         hist_df = ak.stock_zh_a_hist(symbol=stock_code, period="daily", start_date=start_date_str, end_date=end_date_str, adjust="qfq")
         
         # Ensure we only keep the last 'num_trading_days' trading days
