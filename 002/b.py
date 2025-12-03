@@ -5,21 +5,28 @@ import matplotlib.pyplot as plt
 import datetime
 import os
 
-def fetch_and_process_stock_data(stock_code="688027", days=20):
+def fetch_and_process_stock_data(stock_code="688027", num_trading_days=20):
     """
     Fetches stock data, saves it to a markdown file, and creates a chart.
     """
     try:
         # --- 1. Fetch Data ---
         end_date = datetime.date.today()
-        start_date_hist = end_date - datetime.timedelta(days=days)
+        # Fetch data for a longer period to ensure we get enough trading days
+        # A buffer of 1.5x to 2x the trading days is usually sufficient
+        calendar_days_buffer = num_trading_days * 2
+        start_date_hist = end_date - datetime.timedelta(days=calendar_days_buffer)
         
         # Format dates for akshare
         start_date_str = start_date_hist.strftime('%Y%m%d')
         end_date_str = end_date.strftime('%Y%m%d')
 
-        # Fetch historical daily data for the last 20 trading days
+        # Fetch historical daily data
         hist_df = ak.stock_zh_a_hist(symbol=stock_code, period="daily", start_date=start_date_str, end_date=end_date_str, adjust="qfq")
+        
+        # Ensure we only keep the last 'num_trading_days' trading days
+        if not hist_df.empty:
+            hist_df = hist_df.tail(num_trading_days)
 
         # Fetch today's 5-minute data
         try:
@@ -92,7 +99,7 @@ def fetch_and_process_stock_data(stock_code="688027", days=20):
             ax2.bar(plot_df.index, plot_df['成交量'], color=color, alpha=0.6, label='Volume')
             ax2.tick_params(axis='y', labelcolor=color)
 
-            fig.suptitle(f'Stock Price and Volume for {stock_code} (Last {days} Days)')
+            fig.suptitle(f'Stock Price and Volume for {stock_code} (Last {num_trading_days} Trading Days)')
             fig.tight_layout(rect=[0, 0.03, 1, 0.95]) # Adjust layout to make room for title
             
             plt.savefig(png_filepath)
