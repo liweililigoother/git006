@@ -1,89 +1,135 @@
 import akshare as ak
 import pandas as pd
-import matplotlib.pyplot as plt
-import datetime
+import mplfinance as mpf
+from datetime import datetime, timedelta
 import os
+import argparse
 
-def fetch_and_process_today_stock_data(stock_code="688027"):
+def get_stock_data_combined(stock_code="688027", days=200):
     """
-    Fetches today's 5-minute stock data, saves it to a markdown file, 
-    and creates a price-volume chart. Overwrites existing files.
+    获取最近N个交易日的日线数据，并合并所有这些天的5分钟线数据到一个DataFrame。
     """
+    print(f"开始获取股票代码 {stock_code} 的最近 {days} 个交易日数据...")
+    
+    # 根据股票代码前缀判断是上海还是深圳股票，并添加相应前缀
+    if stock_code.startswith('0') or stock_code.startswith('3'):
+        prefixed_stock_code = f"sz{stock_code}"
+    elif stock_code.startswith('6'):
+        prefixed_stock_code = f"sh{stock_code}"
+    else:
+        prefixed_stock_code = stock_code # 保持不变，可能是其他类型代码或已带前缀
+    
     try:
-        # --- 1. Fetch Data ---
-        end_date = datetime.date.today()
-
-        # Fetch today's 5-minute data from East Money
-        today_df = ak.stock_zh_a_hist_min_em(symbol=stock_code, period='5', adjust='qfq')
-
-        if today_df.empty:
-            print(f"No 5-minute data available for {stock_code} today. The market might be closed.")
-            return
-
-        # Filter for today's date just in case the API returns more
-        today_df['日期'] = pd.to_datetime(today_df['时间']).dt.date
-        today_df = today_df[today_df['日期'] == end_date].copy()
+        # 使用 stock_zh_a_minute 获取所有可用的5分钟数据
+        all_5min_data_df = ak.stock_zh_a_minute(symbol=prefixed_stock_code, period="5", adjust="qfq")
         
-        if today_df.empty:
-            print(f"No 5-minute data found for {stock_code} specifically for today's date.")
-            return
-
-        # --- 2. Prepare Data & Save to Markdown ---
-        file_date_str = end_date.strftime('%m%d')
-        md_filename = f"a{file_date_str}.md"
-        png_filename = f"a{file_date_str}.png"
+        if all_5min_data_df.empty:
+            print("未能获取到任何5分钟数据，请检查股票代码或网络。")
+            return None
         
-        # Use the directory of the script for output files
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        md_filepath = os.path.join(script_dir, md_filename)
-        png_filepath = os.path.join(script_dir, png_filename)
-
-        # Select and rename columns for clarity
-        display_df = today_df[['时间', '开盘', '收盘', '最高', '最低', '成交量']].copy()
-
-        with open(md_filepath, 'w', encoding='utf-8') as f:
-            f.write(f"# {stock_code} Today's Stock Data ({end_date.strftime('%Y-%m-%d')})\n\n")
-            f.write("## 5-Minute Intervals\n")
-            f.write(display_df.to_markdown(index=False))
-
-        print(f"Data saved to {md_filepath}")
-
-        # --- 3. Generate Chart ---
-        plot_df = display_df.copy()
-        plot_df['时间'] = pd.to_datetime(plot_df['时间'])
-        plot_df.set_index('时间', inplace=True)
-
-        fig, ax1 = plt.subplots(figsize=(15, 8))
-
-        # Plot closing price as a line chart
-        color = 'tab:red'
-        ax1.set_xlabel('Time')
-        ax1.set_ylabel('Price', color=color)
-        ax1.plot(plot_df.index, plot_df['收盘'], color=color, label='Close Price', marker='o', linestyle='-')
-        ax1.tick_params(axis='y', labelcolor=color)
-        ax1.grid(True)
-
-        # Rotate x-axis labels for better readability
-        plt.setp(ax1.get_xticklabels(), rotation=45, ha="right")
-
-        # Create a second y-axis for volume as a bar chart
-        ax2 = ax1.twinx()
-        color = 'tab:blue'
-        ax2.set_ylabel('Volume', color=color)
-        ax2.bar(plot_df.index, plot_df['成交量'], color=color, alpha=0.6, width=0.002, label='Volume')
-        ax2.tick_params(axis='y', labelcolor=color)
-
-        fig.suptitle(f'Today\'s 5-Min Price and Volume for {stock_code}', fontsize=16)
-        fig.tight_layout(rect=[0, 0.03, 1, 0.95])
+        # 将 'day' 列转换为 datetime 对象
+        all_5min_data_df['datetime'] = pd.to_datetime(all_5min_data_df['day'])
         
-        plt.savefig(png_filepath)
-        print(f"Chart saved to {png_filepath}")
+        # 提取日期部分，并获取唯一的交易日
+        all_5min_data_df['date'] = all_5min_data_df['datetime'].dt.date
+        unique_trading_dates = sorted(all_5min_data_df['date'].unique(), reverse=True)
+        
+        if len(unique_trading_dates) < days:
+            print(f"警告: 只能获取到 {len(unique_trading_dates)} 个交易日的5分钟数据，少于请求的 {days} 天。")
+        
+        # 筛选出最近 days 个交易日的数据
+        recent_trading_dates = unique_trading_dates[:days]
+        combined_df = all_5min_data_df[all_5min_data_df['date'].isin(recent_trading_dates)].copy()
+        
+        if combined_df.empty:
+            print(f"未能从最近 {days} 个交易日中获取到有效数据。")
+            return None
+            
+        # 将列名统一为mplfinance需要的格式
+        combined_df.rename(columns={'开盘': 'open', '收盘': 'close', '最高': 'high', '最低': 'low', '成交量': 'volume'}, inplace=True)
+        
+        # 确保数据类型正确
+        numeric_cols = ['open', 'high', 'low', 'close', 'volume']
+        for col in numeric_cols:
+            combined_df[col] = pd.to_numeric(combined_df[col], errors='coerce')
+        combined_df.dropna(subset=numeric_cols, inplace=True) # 移除转换失败的行
+        
+        # 移除辅助的 'date' 列
+        combined_df.drop(columns=['date'], inplace=True)        
+        print(f"成功获取并筛选到 {len(recent_trading_dates)} 个交易日的5分钟数据。")
+        return combined_df
 
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"获取5分钟数据时发生严重错误: {e}")
+        return None
+
+def save_data_to_csv(df, file_path):
+    """将所有数据保存到单个CSV文件中。"""
+    print(f"正在将所有数据保存到: {file_path}")
+    df.to_csv(file_path, index=False, encoding='utf-8-sig')
+    print("数据保存完毕。")
+
+def generate_candlestick_charts(df, stock_code, output_dir):
+    """为每个交易日生成5分钟K线图。"""
+    print(f"开始为每个交易日生成K线图，保存至 '{output_dir}' 目录...")
+    if df.empty or 'datetime' not in df.columns:
+        print("DataFrame为空或缺少'datetime'列，无法生成图表。")
+        return
+        
+    df_indexed = df.set_index('datetime')
+    
+    # 按天分组
+    daily_groups = df_indexed.groupby(pd.Grouper(freq='D'))
+    
+    for group_name, group_df in daily_groups:
+        if group_df.empty:
+            continue
+            
+        day_str = group_name.strftime('%Y-%m-%d')
+        chart_file = os.path.join(output_dir, f"{day_str}.png")
+        
+        print(f"  - 正在生成 {day_str} 的图表...")
+        
+        # 使用mplfinance绘制K线图
+        mpf.plot(group_df, 
+                 type='candle', 
+                 style='charles',
+                 title=f'{stock_code} 5-Min Data - {day_str}',
+                 ylabel='Price',
+                 ylabel_lower='Volume',
+                 volume=True, 
+                 mav=(5, 10), # 5周期和10周期移动平均线
+                 savefig=chart_file)
+    
+    print("所有图表生成完毕。")
+
+def main():
+    parser = argparse.ArgumentParser(description="获取股票数据，保存并生成图表。")
+    parser.add_argument("--stock_code", type=str, default="688027", help="股票代码")
+    # 固定的天数以满足需求，但保留参数以便未来灵活使用
+    parser.add_argument("--days", type=int, default=200, help="获取最近的交易天数")
+    args = parser.parse_args()
+
+    # 1. 获取最近200个交易日的所有5分钟数据
+    combined_data = get_stock_data_combined(args.stock_code, args.days)
+
+    if combined_data is not None and not combined_data.empty:
+        # 定义输出路径
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        output_dir = os.path.join(script_dir, "output", args.stock_code)
+        os.makedirs(output_dir, exist_ok=True)
+        
+        csv_file_path = os.path.join(output_dir, "all_stock_data.csv")
+
+        # 2. 所有数据存入同一文件
+        save_data_to_csv(combined_data, csv_file_path)
+
+        # 3. 生成每个交易日的五分钟柱状图
+        generate_candlestick_charts(combined_data, args.stock_code, output_dir)
+    else:
+        print("未能获取到有效数据，程序退出。")
+
+    print("\n所有任务已完成。")
 
 if __name__ == "__main__":
-    # Set matplotlib to use a non-interactive backend to avoid display issues in some environments
-    import matplotlib
-    matplotlib.use('Agg')
-    fetch_and_process_today_stock_data()
+    main()
