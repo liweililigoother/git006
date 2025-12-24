@@ -8,6 +8,7 @@ import os
 # --- 配置 ---
 STOCK_CODE = "688027"
 TIME_INTERVAL = 120  # 120秒 = 2分钟
+RUN_DURATION = 600  # 600秒 = 10分钟
 VOLUME_THRESHOLD = 230000000  # 2.3亿
 PRICE_FLUCTUATION_THRESHOLD = 3.2
 OUTPUT_DIR = "git006/001/output"
@@ -28,9 +29,11 @@ def log_to_file(message):
 
 def check_and_log_signals():
     """主循环，获取数据、检查信号并记录"""
+    start_time = time.time()
     print(f"[{get_beijing_time()}] 开始监控股票 {STOCK_CODE}，每 {TIME_INTERVAL} 秒刷新一次。")
+    print(f"此脚本将在 {RUN_DURATION / 60:.0f} 分钟后自动停止。")
     print(f"触发条件: {TIME_INTERVAL}秒内 交易额 > {VOLUME_THRESHOLD/100000000:.2f}亿 且 价格波动 > {PRICE_FLUCTUATION_THRESHOLD}元")
-    print("按 Ctrl+C 停止。  ")
+    print("按 Ctrl+C 停止。")
 
     # 确保文件存在，如果不存在，创建一个空的
     if not os.path.exists(OUTPUT_FILE):
@@ -39,13 +42,18 @@ def check_and_log_signals():
         log_to_file("---")
 
     while True:
+        # 检查是否超时
+        if time.time() - start_time > RUN_DURATION:
+            print(f"[{get_beijing_time()}] 运行达到 {RUN_DURATION / 60:.0f} 分钟，脚本自动停止。")
+            break
+            
         try:
             print(f"[{get_beijing_time()}] 正在获取 {STOCK_CODE} 的分钟线数据...")
             # 获取最新的1分钟K线数据
             stock_df = ak.stock_zh_a_minute(symbol=STOCK_CODE, period='1', adjust='qfq')
             
             if stock_df.empty or len(stock_df) < 2:
-                print("未能获取到足够的数据，等待下一次尝试。  ")
+                print("未能获取到足够的数据，等待下一次尝试。")
                 # 即便没有数据，也按要求记录
                 log_to_file(f"平安无事 | {get_beijing_time()}")
                 time.sleep(TIME_INTERVAL)
@@ -78,8 +86,17 @@ def check_and_log_signals():
                 print(log_message)
                 log_to_file(log_message)
 
-            print(f"[{get_beijing_time()}] 数据处理完毕，等待 {TIME_INTERVAL} 秒...")
-            time.sleep(TIME_INTERVAL)
+            print(f"[{get_beijing_time()}] 数据处理完毕，等待下一次轮询...")
+            
+            # 计算下一次运行前需要等待的时间
+            elapsed_since_start = time.time() - start_time
+            remaining_time = RUN_DURATION - elapsed_since_start
+            
+            # 如果剩余时间小于一个检查周期，就没必要再等了
+            if remaining_time < TIME_INTERVAL:
+                time.sleep(max(0, remaining_time)) # 等待剩余时间
+            else:
+                time.sleep(TIME_INTERVAL)
 
         except Exception as e:
             error_message = f"发生错误: {e}"
