@@ -4,12 +4,12 @@ import pandas_ta as ta
 from datetime import datetime, time, timedelta
 import pytz
 import os
-import time
+import time as time_module
 
 # --- 配置 ---
 STOCK_CODE = "688027"
 TIME_INTERVAL = 120  # 120秒 = 2分钟
-RUN_DURATION = 600  # 600秒 = 10分钟
+RUN_DURATION = 15  # 600秒 = 10分钟
 OUTPUT_DIR = "git006/001/output"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "NEW.md")
 
@@ -78,7 +78,7 @@ def is_trading_time():
 
 def check_and_log_signals():
     """主循环，获取数据、检查信号并记录"""
-    start_time = time.time()
+    start_time = time_module.time()
     print_and_log(f"[{get_beijing_time()}] 开始监控股票 {STOCK_CODE}，每 {TIME_INTERVAL} 秒刷新一次。")
     print_and_log(f"此脚本将在 {RUN_DURATION / 60:.0f} 分钟后自动停止。")
     print_and_log("按 Ctrl+C 停止。\n")
@@ -89,7 +89,7 @@ def check_and_log_signals():
         log_to_file("---")
 
     while True:
-        if time.time() - start_time > RUN_DURATION:
+        if time_module.time() - start_time > RUN_DURATION:
             print_and_log(f"[{get_beijing_time()}] 运行达到 {RUN_DURATION / 60:.0f} 分钟，脚本自动停止。")
             break
         
@@ -114,9 +114,9 @@ def check_and_log_signals():
             sleep_duration = (next_trading_start - now).total_seconds()
             if sleep_duration > 0:
                 print_and_log(f"[{get_beijing_time()}] 预计等待 {sleep_duration / 60:.1f} 分钟直到下一个交易时间...")
-                time.sleep(sleep_duration)
+                time_module.sleep(sleep_duration)
             else:
-                time.sleep(60)
+                time_module.sleep(60)
             continue
 
         try:
@@ -188,7 +188,7 @@ def check_and_log_signals():
 
             print_and_log(f"[{get_beijing_time()}] 数据处理完毕，等待下一次轮询...")
             
-            elapsed_since_start = time.time() - start_time
+            elapsed_since_start = time_module.time() - start_time
             remaining_time = RUN_DURATION - elapsed_since_start
             
             if remaining_time < TIME_INTERVAL:
