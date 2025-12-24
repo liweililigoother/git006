@@ -66,10 +66,10 @@ def check_and_log_signals():
             stock_df_raw = ak.stock_zh_a_minute(symbol=STOCK_CODE, period='1', adjust='qfq')
             
             if stock_df_raw.empty or len(stock_df_raw) < 2:
-                print("未获取到股票数据或数据量不足，可能是股票代码错误或已退市。")
-                log_to_file(f"平安无事 | {get_beijing_time()} | 由于无法获取数据，脚本停止")
-                print("脚本将退出。")
-                break
+                print("未获取到股票数据或数据量不足，可能是股票代码错误或已退市。2分钟后将再次尝试读取。")
+                log_to_file(f"平安无事 | {get_beijing_time()} | 未获取到数据，等待重试")
+                time.sleep(TIME_INTERVAL)
+                continue
 
             signal_found = False
 
