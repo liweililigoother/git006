@@ -64,11 +64,11 @@ def is_trading_time():
         return False
 
     # 上午交易时间
-    am_start = time(9, 30)
-    am_end = time(11, 30)
+    am_start = datetime.time(9, 30)
+    am_end = datetime.time(11, 30)
     # 下午交易时间
-    pm_start = time(13, 0)
-    pm_end = time(15, 0)
+    pm_start = datetime.time(13, 0)
+    pm_end = datetime.time(15, 0)
 
     # 检查是否在交易时间段内
     if (current_time >= am_start and current_time < am_end) or \
@@ -101,9 +101,9 @@ def check_and_log_signals():
             now = datetime.now(tz)
             
             next_trading_start = None
-            if now.time() < time(9, 30):
+            if now.time() < datetime.time(9, 30):
                 next_trading_start = now.replace(hour=9, minute=30, second=0, microsecond=0)
-            elif now.time() < time(13, 0):
+            elif now.time() < datetime.time(13, 0):
                 next_trading_start = now.replace(hour=13, minute=0, second=0, microsecond=0)
             else:
                 days_until_monday = (7 - now.weekday()) % 7
