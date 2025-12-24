@@ -132,6 +132,16 @@ export default {
 				}
 			});
 		}
+		case `/${userID}/allnodes`: {
+			const allServers = [...all_non_tls_servers.map(s => ({...s, tls: false})), ...all_tls_servers.map(s => ({...s, tls: true}))];
+			const vlessLinks = generateVlessLinks(userID, request.headers.get("Host"), allServers);
+			return new Response(vlessLinks, {
+				status: 200,
+				headers: {
+				"Content-Type": "text/plain;charset=utf-8",
+				},
+			});
+		}
           default:
             if (cn_hostnames.includes('')) {
             return new Response(JSON.stringify(request.cf, null, 4), {
@@ -530,6 +540,17 @@ async function handleUDPOutBound(webSocket, vlessResponseHeader) {
 // ================= DYNAMIC CONFIG FUNCTIONS START =================
 // Note: These functions are refactored to be dynamic.
 
+function generateVlessLinks(userID, hostName, servers) {
+	const vlessLinks = servers.map(server => {
+		if (server.tls) {
+			return `vless://${userID}@${server.address}:${server.port}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#TLS_${server.address}_${server.port}`;
+		} else {
+			return `vless://${userID}@${server.address}:${server.port}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#NonTLS_${server.address}_${server.port}`;
+		}
+	}).join('\n');
+	return vlessLinks;
+}
+
 /**
  * Generates a base64-encoded string of vless links.
  * @param {string} userID
@@ -538,13 +559,7 @@ async function handleUDPOutBound(webSocket, vlessResponseHeader) {
  * @returns {string}
  */
 function gettyConfig(userID, hostName, servers) {
-	const vlessLinks = servers.map(server => {
-		if (server.tls) {
-			return `vless://${userID}@${server.address}:${server.port}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#TLS_${server.address}_${server.port}`;
-		} else {
-			return `vless://${userID}@${server.address}:${server.port}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#NonTLS_${server.address}_${server.port}`;
-		}
-	}).join('\n');
+	const vlessLinks = generateVlessLinks(userID, hostName, servers);
 	return btoa(vlessLinks);
 }
 
@@ -770,6 +785,7 @@ function getvlessConfig(userID, hostName) {
   const pty = `https://${hostName}/${userID}/pty`
   const pcl = `https://${hostName}/${userID}/pcl`
   const psb = `https://${hostName}/${userID}/psb`
+  const allnodes = `https://${hostName}/${userID}/allnodes`
   
   const allServersForShare = [...all_non_tls_servers.map(s => ({...s, tls: false})), ...all_tls_servers.map(s => ({...s, tls: true}))];
   const wkvlessshare = gettyConfig(userID, hostName, allServersForShare);
@@ -862,10 +878,13 @@ return `
 			<table class="table">
 				<thead><tr><th>Sing-box订阅链接：</th></tr></thead>
 				<tbody><tr><td class="limited-width">${sb}</td><td><button class="btn btn-primary" onclick="copyToClipboard('${sb}')">点击复制链接</button></td></tr></tbody>
+			</table>
+			<table class="table">
+				<thead><tr><th>所有节点纯文本链接 (方便逐个复制)：</th></tr></thead>
+				<tbody><tr><td class="limited-width"><a href="${allnodes}" target="_blank">${allnodes}</a></td><td><button class="btn btn-primary" onclick="window.open('${allnodes}', '_blank')">点击打开</button></td></tr></tbody>
 			</table><br><br>
         </div></div></div></body>`;
-  }
-} else {
+  } else {
     return `
 <br><br>${displayHtml}
 <body>
@@ -908,6 +927,10 @@ return `
 			<table class="table">
 				<thead><tr><th>Sing-box订阅链接：</th></tr></thead>
 				<tbody><tr><td class="limited-width">${psb}</td><td><button class="btn btn-primary" onclick="copyToClipboard('${psb}')">点击复制链接</button></td></tr></tbody>
+			</table>
+			<table class="table">
+				<thead><tr><th>所有节点纯文本链接 (方便逐个复制)：</th></tr></thead>
+				<tbody><tr><td class="limited-width"><a href="${allnodes}" target="_blank">${allnodes}</a></td><td><button class="btn btn-primary" onclick="window.open('${allnodes}', '_blank')">点击打开</button></td></tr></tbody>
 			</table><br><br>
         </div></div></div></body>`;
   }
