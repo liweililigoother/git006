@@ -1,5 +1,6 @@
 import akshare as ak
 import pandas as pd
+import pandas_ta as ta
 from datetime import datetime
 import pytz
 import time
@@ -9,10 +10,26 @@ import os
 STOCK_CODE = "688027"
 TIME_INTERVAL = 120  # 120秒 = 2分钟
 RUN_DURATION = 600  # 600秒 = 10分钟
-VOLUME_THRESHOLD = 230000000  # 2.3亿
-PRICE_FLUCTUATION_THRESHOLD = 3.2
 OUTPUT_DIR = "git006/001/output"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "NEW.md")
+
+# 量价信号配置
+VOLUME_THRESHOLD = 230000000  # 2.3亿
+PRICE_FLUCTUATION_THRESHOLD = 3.2
+
+# 技术指标配置
+# MACD 参数
+MACD_FAST = 5
+MACD_SLOW = 20
+MACD_SIGNAL = 9
+# KDJ 参数
+KDJ_N = 9
+KDJ_M1 = 3
+KDJ_M2 = 3
+# KDJ 超买超卖阈值 (根据用户输入 kdj(20.80) 理解)
+KDJ_OVERSOLD = 20
+KDJ_OVERBOUGHT = 80
+
 
 def get_beijing_time():
     """获取当前的北京时间"""
@@ -32,69 +49,102 @@ def check_and_log_signals():
     start_time = time.time()
     print(f"[{get_beijing_time()}] 开始监控股票 {STOCK_CODE}，每 {TIME_INTERVAL} 秒刷新一次。")
     print(f"此脚本将在 {RUN_DURATION / 60:.0f} 分钟后自动停止。")
-    print(f"触发条件: {TIME_INTERVAL}秒内 交易额 > {VOLUME_THRESHOLD/100000000:.2f}亿 且 价格波动 > {PRICE_FLUCTUATION_THRESHOLD}元")
     print("按 Ctrl+C 停止。")
 
-    # 确保文件存在，如果不存在，创建一个空的
     if not os.path.exists(OUTPUT_FILE):
-        log_to_file(f"# {STOCK_CODE} 交易信号监控")
+        log_to_file(f"# {STOCK_CODE} 交易信号监控 (混合模式)")
         log_to_file(f"启动时间: {get_beijing_time()}")
         log_to_file("---")
 
     while True:
-        # 检查是否超时
         if time.time() - start_time > RUN_DURATION:
             print(f"[{get_beijing_time()}] 运行达到 {RUN_DURATION / 60:.0f} 分钟，脚本自动停止。")
             break
             
         try:
             print(f"[{get_beijing_time()}] 正在获取 {STOCK_CODE} 的分钟线数据...")
-            # 获取最新的1分钟K线数据
-            stock_df = ak.stock_zh_a_minute(symbol=STOCK_CODE, period='1', adjust='qfq')
+            stock_df_raw = ak.stock_zh_a_minute(symbol=STOCK_CODE, period='1', adjust='qfq')
             
-            if stock_df.empty or len(stock_df) < 2:
+            if stock_df_raw.empty or len(stock_df_raw) < 2:
                 print("未能获取到足够的数据，等待下一次尝试。")
-                # 即便没有数据，也按要求记录
                 log_to_file(f"平安无事 | {get_beijing_time()}")
                 time.sleep(TIME_INTERVAL)
                 continue
 
-            # --- 分析最新的两分钟数据 ---
-            last_two_minutes = stock_df.iloc[-2:]
-            
-            # 计算总交易额 (amount单位是元)
+            signal_found = False
+
+            # --- 1. 量价信号检查 ---
+            last_two_minutes = stock_df_raw.iloc[-2:]
             total_amount = last_two_minutes['amount'].sum()
-            
-            # 计算价格波动
             price_high = last_two_minutes['high'].max()
             price_low = last_two_minutes['low'].min()
             price_fluctuation = price_high - price_low
-
-            # 价格变化方向 (用最后一分钟的收盘价和第一分钟的开盘价)
             price_change = last_two_minutes.iloc[-1]['close'] - last_two_minutes.iloc[0]['open']
 
-            memory_str = f"两分钟交易额: {total_amount/10000:.2f}万元, 价格波动: {price_fluctuation:.2f}元"
-
-            # --- 信号判断逻辑 ---
             if total_amount >= VOLUME_THRESHOLD and price_fluctuation >= PRICE_FLUCTUATION_THRESHOLD:
                 signal = "买入提示" if price_change > 0 else "卖出提示"
+                memory_str = f"两分钟交易额: {total_amount/10000:.2f}万元, 价格波动: {price_fluctuation:.2f}元"
                 log_message = f"{STOCK_CODE} | {signal} | {get_beijing_time()} | {memory_str}"
-                print(f"检测到信号: {log_message}")
+                print(f"检测到量价信号: {log_message}")
                 log_to_file(log_message)
-            else:
+                signal_found = True
+
+            # --- 2. 技术指标信号检查 (MACD & KDJ) ---
+            # 创建一个副本用于计算技术指标，避免污染原始数据
+            stock_df_tech = stock_df_raw.copy()
+            stock_df_tech.ta.macd(fast=MACD_FAST, slow=MACD_SLOW, signal=MACD_SIGNAL, append=True)
+            stock_df_tech.ta.kdj(n=KDJ_N, m1=KDJ_M1, m2=KDJ_M2, append=True)
+            stock_df_tech.dropna(inplace=True)
+
+            if len(stock_df_tech) >= 2:
+                latest = stock_df_tech.iloc[-1]
+                previous = stock_df_tech.iloc[-2]
+
+                # MACD 指标
+                macd_dif_latest = latest[f'MACD_{MACD_FAST}_{MACD_SLOW}_{MACD_SIGNAL}']
+                macd_dea_latest = latest[f'MACDs_{MACD_FAST}_{MACD_SLOW}_{MACD_SIGNAL}']
+                macd_dif_previous = previous[f'MACD_{MACD_FAST}_{MACD_SLOW}_{MACD_SIGNAL}']
+                macd_dea_previous = previous[f'MACDs_{MACD_FAST}_{MACD_SLOW}_{MACD_SIGNAL}']
+
+                # KDJ 指标
+                k_latest = latest[f'K_{KDJ_N}_{KDJ_M1}_{KDJ_M2}']
+                d_latest = latest[f'D_{KDJ_N}_{KDJ_M1}_{KDJ_M2}']
+                k_previous = previous[f'K_{KDJ_N}_{KDJ_M1}_{KDJ_M2}']
+                d_previous = previous[f'D_{KDJ_N}_{KDJ_M1}_{KDJ_M2}']
+
+                # 买入信号: MACD金叉 + KDJ金叉 (且不在超买区)
+                macd_buy = macd_dif_previous < macd_dea_previous and macd_dif_latest > macd_dea_latest
+                kdj_buy = k_previous < d_previous and k_latest > d_latest and k_latest < KDJ_OVERBOUGHT
+
+                if macd_buy and kdj_buy:
+                    log_message = f"{STOCK_CODE} | 买入提示 | {get_beijing_time()} | ma"
+                    print(f"检测到MA信号: {log_message}")
+                    log_to_file(log_message)
+                    signal_found = True
+
+                # 卖出信号: MACD死叉 + KDJ死叉 (且不在超卖区)
+                macd_sell = macd_dif_previous > macd_dea_previous and macd_dif_latest < macd_dea_latest
+                kdj_sell = k_previous > d_previous and k_latest < d_latest and k_latest > KDJ_OVERSOLD
+
+                if macd_sell and kdj_sell:
+                    log_message = f"{STOCK_CODE} | 卖出提示 | {get_beijing_time()} | ma"
+                    print(f"检测到MA信号: {log_message}")
+                    log_to_file(log_message)
+                    signal_found = True
+            
+            # --- 3. 无信号则记录平安 ---
+            if not signal_found:
                 log_message = f"平安无事 | {get_beijing_time()}"
                 print(log_message)
                 log_to_file(log_message)
 
             print(f"[{get_beijing_time()}] 数据处理完毕，等待下一次轮询...")
             
-            # 计算下一次运行前需要等待的时间
             elapsed_since_start = time.time() - start_time
             remaining_time = RUN_DURATION - elapsed_since_start
             
-            # 如果剩余时间小于一个检查周期，就没必要再等了
             if remaining_time < TIME_INTERVAL:
-                time.sleep(max(0, remaining_time)) # 等待剩余时间
+                time.sleep(max(0, remaining_time))
             else:
                 time.sleep(TIME_INTERVAL)
 
@@ -104,7 +154,6 @@ def check_and_log_signals():
             log_to_file(f"错误 | {get_beijing_time()} | {error_message}")
             print(f"等待 {TIME_INTERVAL} 秒后重试...")
             time.sleep(TIME_INTERVAL)
-
 
 if __name__ == "__main__":
     check_and_log_signals()
