@@ -1,22 +1,20 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>圈地博弈</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>空中投弹</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-
-    <h1>圈地博弈</h1>
-    <div id="status-label">欢迎来到圈地博弈！您是 Δ 方 (进攻方)。</div>
-    
     <div id="game-container">
-        <svg id="game-board" width="600" height="600"></svg>
+        <div id="info-bar">
+            <span>HP: <span id="health">100</span></span>
+            <span>Score: <span id="score">0</span></span>
+        </div>
+        <div id="player-plane"></div>
+        <div id="critical-message-container"></div>
     </div>
-
-    <button id="reset-button">重新开始</button>
-
-    <script src="/static/game.js"></script>
+    <script src="../static/game.js"></script>
 </body>
 </html>

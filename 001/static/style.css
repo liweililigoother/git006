@@ -1,113 +1,108 @@
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f0f0f0;
-    color: #333;
+body, html {
     margin: 0;
-    padding: 20px;
-}
-
-h1 {
-    color: #A0522D;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 #game-container {
-    margin-top: 20px;
-    border: 5px solid #A0522D; /* Sienna */
-    background-color: #DEB887; /* BurlyWood */
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(to bottom, #02042b, #001f3f 80%, #003366);
+    overflow: hidden;
+}
+
+#info-bar {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-#status-label {
-    margin-top: 15px;
-    padding: 10px 20px;
-    font-size: 1.2em;
-    font-weight: bold;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    min-height: 25px;
-    text-align: center;
-}
-
-#reset-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1em;
     color: white;
-    background-color: #A0522D; /* Sienna */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#reset-button:hover {
-    background-color: #8B4513; /* SaddleBrown */
-}
-
-/* SVG Styles */
-.line {
-    stroke: #A0522D; /* Sienna */
-    stroke-width: 3;
-}
-
-.node {
-    fill: #DEB887; /* BurlyWood */
-    stroke: #A0522D; /* Sienna */
-    stroke-width: 2;
-    cursor: pointer;
-    transition: fill 0.2s;
-}
-
-.node:hover {
-    fill: #F5DEB3; /* Wheat */
-}
-
-.piece-D {
-    fill: #A0522D; /* Sienna */
-    stroke: #F5DEB3; /* Wheat */
-    stroke-width: 2;
-    pointer-events: none; /* Clicks go to the underlying node */
-}
-
-.piece-O {
-    fill: #F5DEB3; /* Wheat */
-    stroke: #A0522D; /* Sienna */
-    stroke-width: 2;
-    pointer-events: none;
-}
-
-.piece-text-D {
-    fill: #F5DEB3;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
-    pointer-events: none;
-    text-anchor: middle;
-    alignment-baseline: central;
+    z-index: 100;
 }
 
-.piece-text-O {
-    fill: #A0522D;
-    font-size: 20px;
+#player-plane {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 50px solid #c0c0c0; /* Silver color */
+    top: 50px;
+    will-change: transform;
+    transition: transform 0.1s linear;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+}
+
+
+.bomb {
+    position: absolute;
+    width: 8px;
+    height: 25px;
+    background-color: #ff4500; /* Orangered */
+    border-radius: 50% 50% 0 0;
+    box-shadow: 0 0 10px #ff4500;
+    will-change: transform;
+}
+
+.target {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #32cd32; /* Limegreen */
+    border-radius: 50%;
+    will-change: transform;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    color: white;
+}
+
+.explosion {
+    position: absolute;
+    border-radius: 50%;
+    background-color: orange;
+    animation: explode 0.5s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+#critical-message-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ff00ff; /* Fuchsia for visibility */
+    font-size: 4vw;
     font-weight: bold;
-    pointer-events: none;
-    text-anchor: middle;
-    alignment-baseline: central;
+    text-align: center;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px white;
+    z-index: 200;
+    animation: flash 0.5s infinite alternate;
 }
 
-.node-number {
-    fill: #333;
-    font-size: 12px;
-    pointer-events: none;
-    text-anchor: middle;
-    alignment-baseline: central;
-}
-
-.selected {
-    stroke: #007bff; /* Blue */
-    stroke-width: 4;
+@keyframes flash {
+    from { opacity: 1; }
+    to { opacity: 0.7; }
 }
