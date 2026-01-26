@@ -287,3 +287,255 @@
 2026-01-26 07:02:06 | INFO     | src.market_analyzer  | [大盘] 调用大模型生成复盘报告...
 2026-01-26 07:02:29 | INFO     | __main__             | 
 用户中断，程序退出
+2026-01-26 07:11:01 | INFO     | root                 | 日志系统初始化完成，日志目录: /home/user/pgeminionly/git006/003/logs
+2026-01-26 07:11:01 | INFO     | root                 | 常规日志: logs/stock_analysis_20260126.log
+2026-01-26 07:11:01 | INFO     | root                 | 调试日志: logs/stock_analysis_debug_20260126.log
+2026-01-26 07:11:01 | INFO     | __main__             | ============================================================
+2026-01-26 07:11:01 | INFO     | __main__             | A股自选股智能分析系统 启动
+2026-01-26 07:11:01 | INFO     | __main__             | 运行时间: 2026-01-26 07:11:01
+2026-01-26 07:11:01 | INFO     | __main__             | ============================================================
+2026-01-26 07:11:01 | WARNING  | __main__             | 提示：未配置 Tushare Token，将使用其他数据源
+2026-01-26 07:11:01 | WARNING  | __main__             | 提示：未配置搜索引擎 API Key (Bocha/Tavily/SerpAPI)，新闻搜索功能将不可用
+2026-01-26 07:11:01 | WARNING  | __main__             | 提示：未配置通知渠道，将不发送推送通知
+2026-01-26 07:11:01 | INFO     | src.storage          | 数据库初始化完成: sqlite:////home/user/pgeminionly/git006/003/data/stock_analysis.db
+2026-01-26 07:11:01 | WARNING  | data_provider.tushare_fetcher | Tushare Token 未配置，此数据源不可用
+2026-01-26 07:11:01 | INFO     | data_provider.base   | 已初始化 5 个数据源（按优先级）: EfinanceFetcher(P0), AkshareFetcher(P1), TushareFetcher(P2), BaostockFetcher(P3), YfinanceFetcher(P4)
+2026-01-26 07:11:02 | INFO     | src.analyzer         | Gemini 模型初始化成功 (模型: gemini-3-flash-preview)
+2026-01-26 07:11:02 | WARNING  | src.notification     | 未配置有效的通知渠道，将不发送推送通知
+2026-01-26 07:11:02 | WARNING  | src.search_service   | 未配置任何搜索引擎 API Key，新闻搜索功能将不可用
+2026-01-26 07:11:02 | INFO     | src.core.pipeline    | 调度器初始化完成，最大并发数: 3
+2026-01-26 07:11:02 | INFO     | src.core.pipeline    | 已启用趋势分析器 (MA5>MA10>MA20 多头判断)
+2026-01-26 07:11:02 | INFO     | src.core.pipeline    | 实时行情已启用 (优先级: akshare_sina,tencent,efinance,akshare_em)
+2026-01-26 07:11:02 | INFO     | src.core.pipeline    | 筹码分布分析已启用
+2026-01-26 07:11:02 | WARNING  | src.core.pipeline    | 搜索服务未启用（未配置 API Key）
+2026-01-26 07:11:02 | INFO     | src.core.pipeline    | ===== 开始分析 1 只股票 =====
+2026-01-26 07:11:02 | INFO     | src.core.pipeline    | 股票列表: 6088027
+2026-01-26 07:11:02 | INFO     | src.core.pipeline    | 并发数: 3, 模式: 完整分析
+2026-01-26 07:11:02 | INFO     | src.core.pipeline    | ========== 开始处理 6088027 ==========
+2026-01-26 07:11:02 | INFO     | src.core.pipeline    | [6088027] 开始从数据源获取数据...
+2026-01-26 07:11:02 | INFO     | data_provider.base   | 尝试使用 [EfinanceFetcher] 获取 6088027...
+2026-01-26 07:11:02 | INFO     | data_provider.base   | [EfinanceFetcher] 获取 6088027 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 07:11:05 | INFO     | data_provider.efinance_fetcher | [API调用] ef.stock.get_quote_history(stock_codes=6088027, beg=20251127, end=20260126, klt=101, fqt=1)
+2026-01-26 07:11:06 | WARNING  | data_provider.efinance_fetcher | [API返回] ef.stock.get_quote_history 返回空数据, 耗时 0.77s
+2026-01-26 07:11:06 | ERROR    | data_provider.base   | [EfinanceFetcher] 获取 6088027 失败: [EfinanceFetcher] 未获取到 6088027 的数据
+2026-01-26 07:11:06 | WARNING  | data_provider.base   | [EfinanceFetcher] 失败: [EfinanceFetcher] 6088027: [EfinanceFetcher] 未获取到 6088027 的数据
+2026-01-26 07:11:06 | INFO     | data_provider.base   | 尝试使用 [AkshareFetcher] 获取 6088027...
+2026-01-26 07:11:06 | INFO     | data_provider.base   | [AkshareFetcher] 获取 6088027 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 07:11:11 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_zh_a_hist(symbol=6088027, period=daily, start_date=20251127, end_date=20260126, adjust=qfq)
+2026-01-26 07:11:11 | WARNING  | data_provider.akshare_fetcher | [API返回] ak.stock_zh_a_hist 返回空数据, 耗时 0.14s
+2026-01-26 07:11:11 | ERROR    | data_provider.base   | [AkshareFetcher] 获取 6088027 失败: [AkshareFetcher] 未获取到 6088027 的数据
+2026-01-26 07:11:11 | WARNING  | data_provider.base   | [AkshareFetcher] 失败: [AkshareFetcher] 6088027: [AkshareFetcher] 未获取到 6088027 的数据
+2026-01-26 07:11:11 | INFO     | data_provider.base   | 尝试使用 [TushareFetcher] 获取 6088027...
+2026-01-26 07:11:11 | INFO     | data_provider.base   | [TushareFetcher] 获取 6088027 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 07:11:11 | ERROR    | data_provider.base   | [TushareFetcher] 获取 6088027 失败: Tushare API 未初始化，请检查 Token 配置
+2026-01-26 07:11:11 | WARNING  | data_provider.base   | [TushareFetcher] 失败: [TushareFetcher] 6088027: Tushare API 未初始化，请检查 Token 配置
+2026-01-26 07:11:11 | INFO     | data_provider.base   | 尝试使用 [BaostockFetcher] 获取 6088027...
+2026-01-26 07:11:11 | INFO     | data_provider.base   | [BaostockFetcher] 获取 6088027 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 07:11:11 | WARNING  | data_provider.baostock_fetcher | 无法确定股票 6088027 的市场，默认使用深市
+2026-01-26 07:11:12 | ERROR    | data_provider.base   | [BaostockFetcher] 获取 6088027 失败: Baostock 查询失败: 股票代码应为9位，请检查。格式示例：sh.600000。
+2026-01-26 07:11:12 | WARNING  | data_provider.base   | [BaostockFetcher] 失败: [BaostockFetcher] 6088027: Baostock 查询失败: 股票代码应为9位，请检查。格式示例：sh.600000。
+2026-01-26 07:11:12 | INFO     | data_provider.base   | 尝试使用 [YfinanceFetcher] 获取 6088027...
+2026-01-26 07:11:12 | INFO     | data_provider.base   | [YfinanceFetcher] 获取 6088027 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 07:11:13 | WARNING  | data_provider.yfinance_fetcher | 无法确定股票 6088027 的市场，默认使用深市
+2026-01-26 07:11:14 | ERROR    | yfinance             | HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: 6088027.SZ"}}}
+2026-01-26 07:11:14 | ERROR    | yfinance             | 
+1 Failed download:
+2026-01-26 07:11:14 | ERROR    | yfinance             | ['6088027.SZ']: YFTzMissingError('possibly delisted; no timezone found')
+2026-01-26 07:11:14 | ERROR    | data_provider.base   | [YfinanceFetcher] 获取 6088027 失败: Yahoo Finance 未查询到 6088027 的数据
+2026-01-26 07:11:14 | WARNING  | data_provider.base   | [YfinanceFetcher] 失败: [YfinanceFetcher] 6088027: Yahoo Finance 未查询到 6088027 的数据
+2026-01-26 07:11:14 | ERROR    | data_provider.base   | 所有数据源获取 6088027 失败:
+[EfinanceFetcher] 失败: [EfinanceFetcher] 6088027: [EfinanceFetcher] 未获取到 6088027 的数据
+[AkshareFetcher] 失败: [AkshareFetcher] 6088027: [AkshareFetcher] 未获取到 6088027 的数据
+[TushareFetcher] 失败: [TushareFetcher] 6088027: Tushare API 未初始化，请检查 Token 配置
+[BaostockFetcher] 失败: [BaostockFetcher] 6088027: Baostock 查询失败: 股票代码应为9位，请检查。格式示例：sh.600000。
+[YfinanceFetcher] 失败: [YfinanceFetcher] 6088027: Yahoo Finance 未查询到 6088027 的数据
+2026-01-26 07:11:14 | ERROR    | src.core.pipeline    | [6088027] 获取/保存数据失败: 所有数据源获取 6088027 失败:
+[EfinanceFetcher] 失败: [EfinanceFetcher] 6088027: [EfinanceFetcher] 未获取到 6088027 的数据
+[AkshareFetcher] 失败: [AkshareFetcher] 6088027: [AkshareFetcher] 未获取到 6088027 的数据
+[TushareFetcher] 失败: [TushareFetcher] 6088027: Tushare API 未初始化，请检查 Token 配置
+[BaostockFetcher] 失败: [BaostockFetcher] 6088027: Baostock 查询失败: 股票代码应为9位，请检查。格式示例：sh.600000。
+[YfinanceFetcher] 失败: [YfinanceFetcher] 6088027: Yahoo Finance 未查询到 6088027 的数据
+2026-01-26 07:11:14 | WARNING  | src.core.pipeline    | [6088027] 数据获取失败: 获取/保存数据失败: 所有数据源获取 6088027 失败:
+[EfinanceFetcher] 失败: [EfinanceFetcher] 6088027: [EfinanceFetcher] 未获取到 6088027 的数据
+[AkshareFetcher] 失败: [AkshareFetcher] 6088027: [AkshareFetcher] 未获取到 6088027 的数据
+[TushareFetcher] 失败: [TushareFetcher] 6088027: Tushare API 未初始化，请检查 Token 配置
+[BaostockFetcher] 失败: [BaostockFetcher] 6088027: Baostock 查询失败: 股票代码应为9位，请检查。格式示例：sh.600000。
+[YfinanceFetcher] 失败: [YfinanceFetcher] 6088027: Yahoo Finance 未查询到 6088027 的数据
+2026-01-26 07:11:14 | INFO     | data_provider.akshare_fetcher | [API调用] 新浪财经接口获取 6088027 实时行情...
+2026-01-26 07:11:19 | WARNING  | data_provider.akshare_fetcher | [API返回] 新浪接口未找到 6088027 数据
+2026-01-26 07:11:19 | INFO     | data_provider.akshare_fetcher | [API调用] 腾讯财经接口获取 6088027 实时行情...
+2026-01-26 07:11:23 | WARNING  | data_provider.akshare_fetcher | [API返回] 腾讯接口数据字段不足: 1
+2026-01-26 07:11:23 | INFO     | data_provider.efinance_fetcher | [缓存未命中] 触发全量刷新 实时行情(efinance)
+2026-01-26 07:11:26 | INFO     | data_provider.efinance_fetcher | [API调用] ef.stock.get_realtime_quotes() 获取实时行情...
+2026-01-26 07:11:26 | WARNING  | urllib3.connectionpool | Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'RemoteDisconnected('Remote end closed connection without response')': /api/qt/clist/get?pn=1&pz=200&po=1&np=1&fltt=2&invt=2&fid=f12&fs=m%3A0+t%3A6%2Cm%3A0+t%3A80%2Cm%3A1+t%3A2%2Cm%3A1+t%3A23%2Cm%3A0+t%3A81+s%3A2048&fields=f12%2Cf14%2Cf3%2Cf2%2Cf15%2Cf16%2Cf17%2Cf4%2Cf8%2Cf10%2Cf9%2Cf5%2Cf6%2Cf18%2Cf20%2Cf21%2Cf13%2Cf124%2Cf297
+2026-01-26 07:11:26 | WARNING  | urllib3.connectionpool | Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'RemoteDisconnected('Remote end closed connection without response')': /api/qt/clist/get?pn=1&pz=200&po=1&np=1&fltt=2&invt=2&fid=f12&fs=m%3A0+t%3A6%2Cm%3A0+t%3A80%2Cm%3A1+t%3A2%2Cm%3A1+t%3A23%2Cm%3A0+t%3A81+s%3A2048&fields=f12%2Cf14%2Cf3%2Cf2%2Cf15%2Cf16%2Cf17%2Cf4%2Cf8%2Cf10%2Cf9%2Cf5%2Cf6%2Cf18%2Cf20%2Cf21%2Cf13%2Cf124%2Cf297
+2026-01-26 07:11:26 | WARNING  | urllib3.connectionpool | Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'RemoteDisconnected('Remote end closed connection without response')': /api/qt/clist/get?pn=1&pz=200&po=1&np=1&fltt=2&invt=2&fid=f12&fs=m%3A0+t%3A6%2Cm%3A0+t%3A80%2Cm%3A1+t%3A2%2Cm%3A1+t%3A23%2Cm%3A0+t%3A81+s%3A2048&fields=f12%2Cf14%2Cf3%2Cf2%2Cf15%2Cf16%2Cf17%2Cf4%2Cf8%2Cf10%2Cf9%2Cf5%2Cf6%2Cf18%2Cf20%2Cf21%2Cf13%2Cf124%2Cf297
+2026-01-26 07:11:27 | WARNING  | urllib3.connectionpool | Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'RemoteDisconnected('Remote end closed connection without response')': /api/qt/clist/get?pn=1&pz=200&po=1&np=1&fltt=2&invt=2&fid=f12&fs=m%3A0+t%3A6%2Cm%3A0+t%3A80%2Cm%3A1+t%3A2%2Cm%3A1+t%3A23%2Cm%3A0+t%3A81+s%3A2048&fields=f12%2Cf14%2Cf3%2Cf2%2Cf15%2Cf16%2Cf17%2Cf4%2Cf8%2Cf10%2Cf9%2Cf5%2Cf6%2Cf18%2Cf20%2Cf21%2Cf13%2Cf124%2Cf297
+2026-01-26 07:11:27 | WARNING  | urllib3.connectionpool | Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'RemoteDisconnected('Remote end closed connection without response')': /api/qt/clist/get?pn=1&pz=200&po=1&np=1&fltt=2&invt=2&fid=f12&fs=m%3A0+t%3A6%2Cm%3A0+t%3A80%2Cm%3A1+t%3A2%2Cm%3A1+t%3A23%2Cm%3A0+t%3A81+s%3A2048&fields=f12%2Cf14%2Cf3%2Cf2%2Cf15%2Cf16%2Cf17%2Cf4%2Cf8%2Cf10%2Cf9%2Cf5%2Cf6%2Cf18%2Cf20%2Cf21%2Cf13%2Cf124%2Cf297
+2026-01-26 07:11:27 | ERROR    | data_provider.efinance_fetcher | [API错误] 获取 6088027 实时行情(efinance)失败: HTTPConnectionPool(host='push2.eastmoney.com', port=80): Max retries exceeded with url: /api/qt/clist/get?pn=1&pz=200&po=1&np=1&fltt=2&invt=2&fid=f12&fs=m%3A0+t%3A6%2Cm%3A0+t%3A80%2Cm%3A1+t%3A2%2Cm%3A1+t%3A23%2Cm%3A0+t%3A81+s%3A2048&fields=f12%2Cf14%2Cf3%2Cf2%2Cf15%2Cf16%2Cf17%2Cf4%2Cf8%2Cf10%2Cf9%2Cf5%2Cf6%2Cf18%2Cf20%2Cf21%2Cf13%2Cf124%2Cf297 (Caused by ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))
+2026-01-26 07:11:27 | INFO     | data_provider.akshare_fetcher | [缓存未命中] 触发全量刷新 A股实时行情(东财)
+2026-01-26 07:11:30 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_zh_a_spot_em() 获取A股实时行情... (attempt 1/2)
+2026-01-26 07:11:30 | WARNING  | data_provider.akshare_fetcher | [API错误] ak.stock_zh_a_spot_em 获取失败 (attempt 1/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:11:37 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_zh_a_spot_em() 获取A股实时行情... (attempt 2/2)
+2026-01-26 07:11:37 | WARNING  | data_provider.akshare_fetcher | [API错误] ak.stock_zh_a_spot_em 获取失败 (attempt 2/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:11:41 | ERROR    | data_provider.akshare_fetcher | [API错误] ak.stock_zh_a_spot_em 最终失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:11:41 | INFO     | data_provider.akshare_fetcher | [缓存更新] A股实时行情(东财) 缓存已刷新，TTL=1200s
+2026-01-26 07:11:41 | WARNING  | data_provider.akshare_fetcher | [实时行情] A股实时行情数据为空，跳过 6088027
+2026-01-26 07:11:41 | WARNING  | data_provider.base   | [实时行情] 6088027 无可用数据源
+2026-01-26 07:11:41 | INFO     | src.core.pipeline    | [6088027] 实时行情获取失败或已禁用，将使用历史数据进行分析
+2026-01-26 07:11:43 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_cyq_em(symbol=6088027) 获取筹码分布...
+2026-01-26 07:11:43 | ERROR    | data_provider.akshare_fetcher | [API错误] 获取 6088027 筹码分布失败: 'NoneType' object is not subscriptable
+2026-01-26 07:11:44 | WARNING  | src.storage          | 未找到 6088027 的数据
+2026-01-26 07:11:44 | INFO     | src.core.pipeline    | [6088027] 搜索服务不可用，跳过情报搜索
+2026-01-26 07:11:44 | WARNING  | src.storage          | 未找到 6088027 的数据
+2026-01-26 07:11:44 | WARNING  | src.core.pipeline    | [6088027] 无法获取分析上下文，跳过分析
+2026-01-26 07:11:44 | INFO     | src.core.pipeline    | ===== 分析完成 =====
+2026-01-26 07:11:44 | INFO     | src.core.pipeline    | 成功: 0, 失败: 1, 耗时: 41.34 秒
+2026-01-26 07:11:44 | INFO     | src.core.market_review | 开始执行大盘复盘分析...
+2026-01-26 07:11:44 | INFO     | src.market_analyzer  | ========== 开始大盘复盘分析 ==========
+2026-01-26 07:11:44 | INFO     | src.market_analyzer  | [大盘] 获取主要指数实时行情...
+2026-01-26 07:11:47 | INFO     | src.market_analyzer  | [大盘] 获取到 6 个指数行情
+2026-01-26 07:11:47 | INFO     | src.market_analyzer  | [大盘] 获取市场涨跌统计...
+2026-01-26 07:11:47 | WARNING  | src.market_analyzer  | [大盘] A股实时行情 获取失败 (attempt 1/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:11:50 | WARNING  | src.market_analyzer  | [大盘] A股实时行情 获取失败 (attempt 2/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:11:50 | ERROR    | src.market_analyzer  | [大盘] A股实时行情 最终失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:11:50 | INFO     | src.market_analyzer  | [大盘] 获取板块涨跌榜...
+2026-01-26 07:11:51 | INFO     | __main__             | 
+用户中断，程序退出
+2026-01-26 07:12:30 | INFO     | root                 | 日志系统初始化完成，日志目录: /home/user/pgeminionly/git006/003/logs
+2026-01-26 07:12:30 | INFO     | root                 | 常规日志: logs/stock_analysis_20260126.log
+2026-01-26 07:12:30 | INFO     | root                 | 调试日志: logs/stock_analysis_debug_20260126.log
+2026-01-26 07:12:30 | INFO     | __main__             | ============================================================
+2026-01-26 07:12:30 | INFO     | __main__             | A股自选股智能分析系统 启动
+2026-01-26 07:12:30 | INFO     | __main__             | 运行时间: 2026-01-26 07:12:30
+2026-01-26 07:12:30 | INFO     | __main__             | ============================================================
+2026-01-26 07:12:30 | WARNING  | __main__             | 提示：未配置 Tushare Token，将使用其他数据源
+2026-01-26 07:12:30 | WARNING  | __main__             | 提示：未配置搜索引擎 API Key (Bocha/Tavily/SerpAPI)，新闻搜索功能将不可用
+2026-01-26 07:12:30 | WARNING  | __main__             | 提示：未配置通知渠道，将不发送推送通知
+2026-01-26 07:12:30 | INFO     | src.storage          | 数据库初始化完成: sqlite:////home/user/pgeminionly/git006/003/data/stock_analysis.db
+2026-01-26 07:12:30 | WARNING  | data_provider.tushare_fetcher | Tushare Token 未配置，此数据源不可用
+2026-01-26 07:12:30 | INFO     | data_provider.base   | 已初始化 5 个数据源（按优先级）: EfinanceFetcher(P0), AkshareFetcher(P1), TushareFetcher(P2), BaostockFetcher(P3), YfinanceFetcher(P4)
+2026-01-26 07:12:32 | INFO     | src.analyzer         | Gemini 模型初始化成功 (模型: gemini-3-flash-preview)
+2026-01-26 07:12:32 | WARNING  | src.notification     | 未配置有效的通知渠道，将不发送推送通知
+2026-01-26 07:12:32 | WARNING  | src.search_service   | 未配置任何搜索引擎 API Key，新闻搜索功能将不可用
+2026-01-26 07:12:32 | INFO     | src.core.pipeline    | 调度器初始化完成，最大并发数: 3
+2026-01-26 07:12:32 | INFO     | src.core.pipeline    | 已启用趋势分析器 (MA5>MA10>MA20 多头判断)
+2026-01-26 07:12:32 | INFO     | src.core.pipeline    | 实时行情已启用 (优先级: akshare_sina,tencent,efinance,akshare_em)
+2026-01-26 07:12:32 | INFO     | src.core.pipeline    | 筹码分布分析已启用
+2026-01-26 07:12:32 | WARNING  | src.core.pipeline    | 搜索服务未启用（未配置 API Key）
+2026-01-26 07:12:32 | INFO     | src.core.pipeline    | ===== 开始分析 1 只股票 =====
+2026-01-26 07:12:32 | INFO     | src.core.pipeline    | 股票列表: 688027
+2026-01-26 07:12:32 | INFO     | src.core.pipeline    | 并发数: 3, 模式: 完整分析
+2026-01-26 07:12:32 | INFO     | src.core.pipeline    | ========== 开始处理 688027 ==========
+2026-01-26 07:12:32 | INFO     | src.core.pipeline    | [688027] 开始从数据源获取数据...
+2026-01-26 07:12:32 | INFO     | data_provider.base   | 尝试使用 [EfinanceFetcher] 获取 688027...
+2026-01-26 07:12:32 | INFO     | data_provider.base   | [EfinanceFetcher] 获取 688027 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 07:12:35 | INFO     | data_provider.efinance_fetcher | [API调用] ef.stock.get_quote_history(stock_codes=688027, beg=20251127, end=20260126, klt=101, fqt=1)
+2026-01-26 07:12:36 | INFO     | data_provider.efinance_fetcher | [API返回] ef.stock.get_quote_history 成功: 返回 41 行数据, 耗时 0.81s
+2026-01-26 07:12:36 | INFO     | data_provider.efinance_fetcher | [API返回] 列名: ['股票名称', '股票代码', '日期', '开盘', '收盘', '最高', '最低', '成交量', '成交额', '振幅', '涨跌幅', '涨跌额', '换手率']
+2026-01-26 07:12:36 | INFO     | data_provider.efinance_fetcher | [API返回] 日期范围: 2025-11-27 ~ 2026-01-26
+2026-01-26 07:12:36 | INFO     | data_provider.base   | [EfinanceFetcher] 688027 获取成功，共 41 条数据
+2026-01-26 07:12:36 | INFO     | data_provider.base   | [EfinanceFetcher] 成功获取 688027
+2026-01-26 07:12:36 | INFO     | src.storage          | 保存 688027 数据成功，新增 41 条
+2026-01-26 07:12:36 | INFO     | src.core.pipeline    | [688027] 数据保存成功（来源: EfinanceFetcher，新增 41 条）
+2026-01-26 07:12:36 | INFO     | data_provider.akshare_fetcher | [API调用] 新浪财经接口获取 688027 实时行情...
+2026-01-26 07:12:39 | INFO     | data_provider.akshare_fetcher | [实时行情-新浪] 688027 国盾量子: 价格=580.0, 涨跌=-4.72%
+2026-01-26 07:12:39 | INFO     | data_provider.base   | [实时行情] 688027 成功获取 (来源: akshare_sina)
+2026-01-26 07:12:39 | INFO     | src.core.pipeline    | [688027] 国盾量子 实时行情: 价格=580.0, 量比=None, 换手率=None% (来源: akshare_sina)
+2026-01-26 07:12:43 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_cyq_em(symbol=688027) 获取筹码分布...
+2026-01-26 07:12:46 | INFO     | data_provider.akshare_fetcher | [API返回] ak.stock_cyq_em 成功: 返回 90 天数据, 耗时 3.11s
+2026-01-26 07:12:46 | INFO     | data_provider.akshare_fetcher | [筹码分布] 688027 日期=2026-01-26: 获利比例=53.9%, 平均成本=562.75, 90%集中度=17.50%, 70%集中度=12.37%
+2026-01-26 07:12:46 | INFO     | src.core.pipeline    | [688027] 筹码分布: 获利比例=53.9%, 90%集中度=17.50%
+2026-01-26 07:12:46 | INFO     | src.core.pipeline    | [688027] 搜索服务不可用，跳过情报搜索
+2026-01-26 07:12:48 | INFO     | src.analyzer         | ========== AI 分析 国盾量子(688027) ==========
+2026-01-26 07:12:48 | INFO     | src.analyzer         | [LLM配置] 模型: gemini-3-flash-preview
+2026-01-26 07:12:48 | INFO     | src.analyzer         | [LLM配置] Prompt 长度: 1377 字符
+2026-01-26 07:12:48 | INFO     | src.analyzer         | [LLM配置] 是否包含新闻: 否
+2026-01-26 07:12:48 | INFO     | src.analyzer         | [LLM Prompt 预览]
+# 决策仪表盘分析请求
+
+## 📊 股票基础信息
+| 项目 | 数据 |
+|------|------|
+| 股票代码 | **688027** |
+| 股票名称 | **国盾量子** |
+| 分析日期 | 2026-01-26 |
+
+---
+
+## 📈 技术面数据
+
+### 今日行情
+| 指标 | 数值 |
+|------|------|
+| 收盘价 | 580.0 元 |
+| 开盘价 | 606.0 元 |
+| 最高价 | 606.9 元 |
+| 最低价 | 577.0 元 |
+| 涨跌幅 | -4.72% |
+| 成交量 | 3.37 万股 |
+| 成交额 | 19.71 亿元 |
+
+### 均线系统（关键判断指标）
+| 均线 | 数值 | 说明 |
+|------|------|------|
+| MA5 | 591.67 | 短期趋势线 |
+| MA10 | 606.6 | 中短期趋势线 |
+| MA20 | 576.37 | 中期趋势线 |
+| 均线形态 | 短期走弱 🔽 | 多头/空头/缠绕 |
+
+### 实时行情增强数据
+| 指标 | 数值 | 解读 |
+|------...
+2026-01-26 07:12:48 | INFO     | src.analyzer         | [LLM调用] 开始调用 Gemini API (temperature=0.7, max_tokens=8192)...
+2026-01-26 07:13:12 | INFO     | src.analyzer         | [LLM返回] Gemini API 响应成功, 耗时 23.66s, 响应长度 3804 字符
+2026-01-26 07:13:12 | INFO     | src.analyzer         | [LLM返回 预览]
+```json
+{
+    "sentiment_score": 42,
+    "trend_prediction": "震荡看空",
+    "operation_advice": "观望",
+    "confidence_level": "中",
+    
+    "dashboard": {
+        "core_conclusion": {
+            "one_sentence": "MA5死叉MA10且放量下跌，短期趋势破位，需等待MA20支撑有效性。",
+            "signal_type": "🟡持有观望",
+            "tim...
+2026-01-26 07:13:12 | INFO     | src.analyzer         | [LLM解析] 国盾量子(688027) 分析完成: 震荡看空, 评分 42
+2026-01-26 07:13:12 | INFO     | src.core.pipeline    | [688027] 分析完成: 观望, 评分 42
+2026-01-26 07:13:12 | INFO     | src.core.pipeline    | ===== 分析完成 =====
+2026-01-26 07:13:12 | INFO     | src.core.pipeline    | 成功: 1, 失败: 0, 耗时: 40.00 秒
+2026-01-26 07:13:12 | INFO     | src.core.pipeline    | 生成决策仪表盘日报...
+2026-01-26 07:13:12 | INFO     | src.notification     | 日报已保存到: /home/user/pgeminionly/git006/003/stock/src/reports/report_20260126.md
+2026-01-26 07:13:12 | INFO     | src.core.pipeline    | 决策仪表盘日报已保存: /home/user/pgeminionly/git006/003/stock/src/reports/report_20260126.md
+2026-01-26 07:13:12 | INFO     | src.core.pipeline    | 通知渠道未配置，跳过推送
+2026-01-26 07:13:12 | INFO     | src.core.market_review | 开始执行大盘复盘分析...
+2026-01-26 07:13:12 | INFO     | src.market_analyzer  | ========== 开始大盘复盘分析 ==========
+2026-01-26 07:13:12 | INFO     | src.market_analyzer  | [大盘] 获取主要指数实时行情...
+2026-01-26 07:13:16 | INFO     | src.market_analyzer  | [大盘] 获取到 6 个指数行情
+2026-01-26 07:13:16 | INFO     | src.market_analyzer  | [大盘] 获取市场涨跌统计...
+2026-01-26 07:13:17 | WARNING  | src.market_analyzer  | [大盘] A股实时行情 获取失败 (attempt 1/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:13:19 | WARNING  | src.market_analyzer  | [大盘] A股实时行情 获取失败 (attempt 2/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:13:19 | ERROR    | src.market_analyzer  | [大盘] A股实时行情 最终失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:13:19 | INFO     | src.market_analyzer  | [大盘] 获取板块涨跌榜...
+2026-01-26 07:13:21 | WARNING  | src.market_analyzer  | [大盘] 行业板块行情 获取失败 (attempt 1/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:13:23 | WARNING  | src.market_analyzer  | [大盘] 行业板块行情 获取失败 (attempt 2/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:13:23 | ERROR    | src.market_analyzer  | [大盘] 行业板块行情 最终失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:13:23 | INFO     | src.market_analyzer  | [大盘] 开始搜索市场新闻...
+2026-01-26 07:13:23 | INFO     | src.search_service   | 搜索股票新闻: 大盘(market)
+2026-01-26 07:13:23 | INFO     | src.search_service   | 搜索股票新闻: 大盘(market)
+2026-01-26 07:13:23 | INFO     | src.search_service   | 搜索股票新闻: 大盘(market)
+2026-01-26 07:13:23 | INFO     | src.market_analyzer  | [大盘] 共获取 0 条市场新闻
+2026-01-26 07:13:23 | INFO     | src.market_analyzer  | [大盘] 调用大模型生成复盘报告...
+2026-01-26 07:13:52 | INFO     | src.market_analyzer  | [大盘] 复盘报告生成成功，长度: 847 字符
+2026-01-26 07:13:52 | INFO     | src.market_analyzer  | ========== 大盘复盘分析完成 ==========
+2026-01-26 07:13:52 | INFO     | src.notification     | 日报已保存到: /home/user/pgeminionly/git006/003/stock/src/reports/market_review_20260126.md
+2026-01-26 07:13:52 | INFO     | src.core.market_review | 大盘复盘报告已保存: /home/user/pgeminionly/git006/003/stock/src/reports/market_review_20260126.md
+2026-01-26 07:13:52 | INFO     | __main__             | 
+===== 分析结果摘要 =====
+2026-01-26 07:13:52 | INFO     | __main__             | ⚪ 国盾量子(688027): 观望 | 评分 42 | 震荡看空
+2026-01-26 07:13:52 | INFO     | __main__             | 
+任务执行完成
+2026-01-26 07:13:52 | INFO     | __main__             | 
+程序执行完成
