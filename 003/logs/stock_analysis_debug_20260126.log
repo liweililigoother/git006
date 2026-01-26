@@ -1,0 +1,820 @@
+2026-01-26 06:59:18 | INFO     | root                 | 日志系统初始化完成，日志目录: /home/user/pgeminionly/git006/003/logs
+2026-01-26 06:59:18 | INFO     | root                 | 常规日志: logs/stock_analysis_20260126.log
+2026-01-26 06:59:18 | INFO     | root                 | 调试日志: logs/stock_analysis_debug_20260126.log
+2026-01-26 06:59:18 | INFO     | __main__             | ============================================================
+2026-01-26 06:59:18 | INFO     | __main__             | A股自选股智能分析系统 启动
+2026-01-26 06:59:18 | INFO     | __main__             | 运行时间: 2026-01-26 06:59:18
+2026-01-26 06:59:18 | INFO     | __main__             | ============================================================
+2026-01-26 06:59:18 | WARNING  | __main__             | 提示：未配置 Tushare Token，将使用其他数据源
+2026-01-26 06:59:18 | WARNING  | __main__             | 提示：未配置搜索引擎 API Key (Bocha/Tavily/SerpAPI)，新闻搜索功能将不可用
+2026-01-26 06:59:18 | WARNING  | __main__             | 提示：未配置通知渠道，将不发送推送通知
+2026-01-26 06:59:19 | INFO     | src.storage          | 数据库初始化完成: sqlite:////home/user/pgeminionly/git006/003/data/stock_analysis.db
+2026-01-26 06:59:19 | WARNING  | data_provider.tushare_fetcher | Tushare Token 未配置，此数据源不可用
+2026-01-26 06:59:19 | INFO     | data_provider.base   | 已初始化 5 个数据源（按优先级）: EfinanceFetcher(P0), AkshareFetcher(P1), TushareFetcher(P2), BaostockFetcher(P3), YfinanceFetcher(P4)
+2026-01-26 06:59:21 | INFO     | src.analyzer         | Gemini 模型初始化成功 (模型: gemini-3-flash-preview)
+2026-01-26 06:59:21 | WARNING  | src.notification     | 未配置有效的通知渠道，将不发送推送通知
+2026-01-26 06:59:21 | WARNING  | src.search_service   | 未配置任何搜索引擎 API Key，新闻搜索功能将不可用
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | 调度器初始化完成，最大并发数: 3
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | 已启用趋势分析器 (MA5>MA10>MA20 多头判断)
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | 实时行情已启用 (优先级: akshare_sina,tencent,efinance,akshare_em)
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | 筹码分布分析已启用
+2026-01-26 06:59:21 | WARNING  | src.core.pipeline    | 搜索服务未启用（未配置 API Key）
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | ===== 开始分析 3 只股票 =====
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | 股票列表: 6088027, hk00700, AAPL
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | 并发数: 3, 模式: 完整分析
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | ========== 开始处理 6088027 ==========
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | ========== 开始处理 hk00700 ==========
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | ========== 开始处理 AAPL ==========
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | [hk00700] 开始从数据源获取数据...
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | [6088027] 开始从数据源获取数据...
+2026-01-26 06:59:21 | INFO     | data_provider.base   | 尝试使用 [EfinanceFetcher] 获取 hk00700...
+2026-01-26 06:59:21 | INFO     | data_provider.base   | 尝试使用 [EfinanceFetcher] 获取 6088027...
+2026-01-26 06:59:21 | INFO     | data_provider.base   | [EfinanceFetcher] 获取 6088027 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 06:59:21 | INFO     | src.core.pipeline    | [AAPL] 开始从数据源获取数据...
+2026-01-26 06:59:21 | INFO     | data_provider.base   | [EfinanceFetcher] 获取 hk00700 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 06:59:21 | INFO     | data_provider.base   | 尝试使用 [EfinanceFetcher] 获取 AAPL...
+2026-01-26 06:59:21 | INFO     | data_provider.base   | [EfinanceFetcher] 获取 AAPL 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 06:59:21 | DEBUG    | data_provider.efinance_fetcher | 设置 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Ap...
+2026-01-26 06:59:21 | DEBUG    | data_provider.base   | 随机休眠 1.57 秒...
+2026-01-26 06:59:21 | DEBUG    | data_provider.efinance_fetcher | 设置 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Ap...
+2026-01-26 06:59:21 | DEBUG    | data_provider.base   | 随机休眠 2.58 秒...
+2026-01-26 06:59:21 | DEBUG    | data_provider.efinance_fetcher | 设置 User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36...
+2026-01-26 06:59:21 | DEBUG    | data_provider.base   | 随机休眠 1.57 秒...
+2026-01-26 06:59:22 | INFO     | data_provider.efinance_fetcher | [API调用] ef.stock.get_quote_history(stock_codes=6088027, beg=20251127, end=20260126, klt=101, fqt=1)
+2026-01-26 06:59:22 | INFO     | data_provider.efinance_fetcher | [API调用] ef.stock.get_quote_history(stock_codes=hk00700, beg=20251127, end=20260126, klt=101, fqt=1)
+2026-01-26 06:59:23 | WARNING  | data_provider.efinance_fetcher | [API返回] ef.stock.get_quote_history 返回空数据, 耗时 0.81s
+2026-01-26 06:59:23 | ERROR    | data_provider.base   | [EfinanceFetcher] 获取 6088027 失败: [EfinanceFetcher] 未获取到 6088027 的数据
+2026-01-26 06:59:23 | WARNING  | data_provider.base   | [EfinanceFetcher] 失败: [EfinanceFetcher] 6088027: [EfinanceFetcher] 未获取到 6088027 的数据
+2026-01-26 06:59:23 | INFO     | data_provider.base   | 尝试使用 [AkshareFetcher] 获取 6088027...
+2026-01-26 06:59:23 | INFO     | data_provider.base   | [AkshareFetcher] 获取 6088027 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 06:59:23 | DEBUG    | data_provider.akshare_fetcher | 设置 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Ap...
+2026-01-26 06:59:23 | DEBUG    | data_provider.base   | 随机休眠 3.27 秒...
+2026-01-26 06:59:23 | WARNING  | data_provider.efinance_fetcher | [API返回] ef.stock.get_quote_history 返回空数据, 耗时 0.82s
+2026-01-26 06:59:23 | ERROR    | data_provider.base   | [EfinanceFetcher] 获取 hk00700 失败: [EfinanceFetcher] 未获取到 hk00700 的数据
+2026-01-26 06:59:23 | WARNING  | data_provider.base   | [EfinanceFetcher] 失败: [EfinanceFetcher] hk00700: [EfinanceFetcher] 未获取到 hk00700 的数据
+2026-01-26 06:59:23 | INFO     | data_provider.base   | 尝试使用 [AkshareFetcher] 获取 hk00700...
+2026-01-26 06:59:23 | INFO     | data_provider.base   | [AkshareFetcher] 获取 hk00700 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 06:59:23 | DEBUG    | data_provider.akshare_fetcher | 设置 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0...
+2026-01-26 06:59:23 | DEBUG    | data_provider.base   | 随机休眠 4.61 秒...
+2026-01-26 06:59:23 | INFO     | data_provider.efinance_fetcher | [API调用] ef.stock.get_quote_history(stock_codes=AAPL, beg=20251127, end=20260126, klt=101, fqt=1)
+2026-01-26 06:59:24 | INFO     | data_provider.efinance_fetcher | [API返回] ef.stock.get_quote_history 成功: 返回 38 行数据, 耗时 0.20s
+2026-01-26 06:59:24 | INFO     | data_provider.efinance_fetcher | [API返回] 列名: ['股票名称', '股票代码', '日期', '开盘', '收盘', '最高', '最低', '成交量', '成交额', '振幅', '涨跌幅', '涨跌额', '换手率']
+2026-01-26 06:59:24 | INFO     | data_provider.efinance_fetcher | [API返回] 日期范围: 2025-11-28 ~ 2026-01-23
+2026-01-26 06:59:24 | DEBUG    | data_provider.efinance_fetcher | [API返回] 最新3条数据:
+   股票名称  股票代码          日期      开盘      收盘      最高      最低       成交量           成交额    振幅   涨跌幅   涨跌额   换手率
+35   苹果  AAPL  2026-01-21  248.70  247.65  251.56  245.18  54641725  1.353558e+10  2.59  0.39  0.95  0.37
+36   苹果  AAPL  2026-01-22  249.20  248.35  251.00  248.15  39708340  9.897893e+09  1.15  0.28  0.70  0.27
+37   苹果  AAPL  2026-01-23  247.32  248.04  249.41  244.68  41688982  1.032052e+10  1.90 -0.12 -0.31  0.28
+2026-01-26 06:59:24 | INFO     | data_provider.base   | [EfinanceFetcher] AAPL 获取成功，共 38 条数据
+2026-01-26 06:59:24 | INFO     | data_provider.base   | [EfinanceFetcher] 成功获取 AAPL
+2026-01-26 06:59:24 | INFO     | src.storage          | 保存 AAPL 数据成功，新增 38 条
+2026-01-26 06:59:24 | INFO     | src.core.pipeline    | [AAPL] 数据保存成功（来源: EfinanceFetcher，新增 38 条）
+2026-01-26 06:59:24 | DEBUG    | data_provider.akshare_fetcher | [API跳过] AAPL 是美股，Akshare 不支持美股实时行情
+2026-01-26 06:59:24 | DEBUG    | data_provider.akshare_fetcher | [API跳过] AAPL 是美股，Akshare 不支持美股实时行情
+2026-01-26 06:59:24 | INFO     | data_provider.efinance_fetcher | [缓存未命中] 触发全量刷新 实时行情(efinance)
+2026-01-26 06:59:24 | DEBUG    | data_provider.efinance_fetcher | 设置 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0...
+2026-01-26 06:59:24 | DEBUG    | data_provider.efinance_fetcher | 补充休眠 1.12 秒
+2026-01-26 06:59:25 | DEBUG    | data_provider.base   | 随机休眠 1.68 秒...
+2026-01-26 06:59:26 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_zh_a_hist(symbol=6088027, period=daily, start_date=20251127, end_date=20260126, adjust=qfq)
+2026-01-26 06:59:27 | INFO     | data_provider.efinance_fetcher | [API调用] ef.stock.get_realtime_quotes() 获取实时行情...
+2026-01-26 06:59:27 | WARNING  | data_provider.akshare_fetcher | [API返回] ak.stock_zh_a_hist 返回空数据, 耗时 0.28s
+2026-01-26 06:59:27 | ERROR    | data_provider.base   | [AkshareFetcher] 获取 6088027 失败: [AkshareFetcher] 未获取到 6088027 的数据
+2026-01-26 06:59:27 | WARNING  | data_provider.base   | [AkshareFetcher] 失败: [AkshareFetcher] 6088027: [AkshareFetcher] 未获取到 6088027 的数据
+2026-01-26 06:59:27 | INFO     | data_provider.base   | 尝试使用 [TushareFetcher] 获取 6088027...
+2026-01-26 06:59:27 | INFO     | data_provider.base   | [TushareFetcher] 获取 6088027 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 06:59:27 | ERROR    | data_provider.base   | [TushareFetcher] 获取 6088027 失败: Tushare API 未初始化，请检查 Token 配置
+2026-01-26 06:59:27 | WARNING  | data_provider.base   | [TushareFetcher] 失败: [TushareFetcher] 6088027: Tushare API 未初始化，请检查 Token 配置
+2026-01-26 06:59:27 | INFO     | data_provider.base   | 尝试使用 [BaostockFetcher] 获取 6088027...
+2026-01-26 06:59:27 | INFO     | data_provider.base   | [BaostockFetcher] 获取 6088027 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 06:59:27 | WARNING  | data_provider.baostock_fetcher | 无法确定股票 6088027 的市场，默认使用深市
+2026-01-26 06:59:27 | DEBUG    | data_provider.baostock_fetcher | 调用 Baostock query_history_k_data_plus(sz.6088027, 2025-11-27, 2026-01-26)
+2026-01-26 06:59:28 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_hk_hist(symbol=00700, period=daily, start_date=20251127, end_date=20260126, adjust=qfq)
+2026-01-26 06:59:28 | DEBUG    | data_provider.baostock_fetcher | Baostock 登录成功
+2026-01-26 06:59:28 | DEBUG    | data_provider.baostock_fetcher | Baostock 登出成功
+2026-01-26 06:59:28 | ERROR    | data_provider.base   | [BaostockFetcher] 获取 6088027 失败: Baostock 查询失败: 股票代码应为9位，请检查。格式示例：sh.600000。
+2026-01-26 06:59:28 | WARNING  | data_provider.base   | [BaostockFetcher] 失败: [BaostockFetcher] 6088027: Baostock 查询失败: 股票代码应为9位，请检查。格式示例：sh.600000。
+2026-01-26 06:59:28 | INFO     | data_provider.base   | 尝试使用 [YfinanceFetcher] 获取 6088027...
+2026-01-26 06:59:28 | INFO     | data_provider.base   | [YfinanceFetcher] 获取 6088027 数据: 2025-11-27 ~ 2026-01-26
+2026-01-26 06:59:28 | INFO     | data_provider.akshare_fetcher | [API返回] ak.stock_hk_hist 成功: 返回 40 行数据, 耗时 0.63s
+2026-01-26 06:59:28 | INFO     | data_provider.akshare_fetcher | [API返回] 列名: ['日期', '开盘', '收盘', '最高', '最低', '成交量', '成交额', '振幅', '涨跌幅', '涨跌额', '换手率']
+2026-01-26 06:59:28 | INFO     | data_provider.akshare_fetcher | [API返回] 日期范围: 2025-11-27 ~ 2026-01-26
+2026-01-26 06:59:28 | DEBUG    | data_provider.akshare_fetcher | [API返回] 最新3条数据:
+            日期     开盘     收盘     最高     最低       成交量           成交额    振幅   涨跌幅  涨跌额   换手率
+37  2026-01-22  604.5  597.5  605.5  596.0  27168713  1.627846e+10  1.58 -0.83 -5.0  0.30
+38  2026-01-23  597.5  595.0  602.0  595.0  19177660  1.144568e+10  1.17 -0.42 -2.5  0.21
+39  2026-01-26  595.0  598.5  605.0  594.0  13204807  7.898440e+09  1.85  0.59  3.5  0.14
+2026-01-26 06:59:28 | INFO     | data_provider.base   | [AkshareFetcher] hk00700 获取成功，共 40 条数据
+2026-01-26 06:59:28 | INFO     | data_provider.base   | [AkshareFetcher] 成功获取 hk00700
+2026-01-26 06:59:29 | INFO     | src.storage          | 保存 hk00700 数据成功，新增 40 条
+2026-01-26 06:59:29 | INFO     | src.core.pipeline    | [hk00700] 数据保存成功（来源: AkshareFetcher，新增 40 条）
+2026-01-26 06:59:29 | DEBUG    | data_provider.akshare_fetcher | 设置 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...
+2026-01-26 06:59:29 | DEBUG    | data_provider.akshare_fetcher | 补充休眠 1.26 秒
+2026-01-26 06:59:29 | WARNING  | data_provider.yfinance_fetcher | 无法确定股票 6088027 的市场，默认使用深市
+2026-01-26 06:59:29 | DEBUG    | data_provider.yfinance_fetcher | 调用 yfinance.download(6088027.SZ, 2025-11-27, 2026-01-26)
+2026-01-26 06:59:29 | DEBUG    | yfinance             | Entering download()
+2026-01-26 06:59:29 | DEBUG    | yfinance             | Disabling multithreading because DEBUG logging enabled
+2026-01-26 06:59:29 | DEBUG    | yfinance             |  Entering history()
+2026-01-26 06:59:29 | DEBUG    | peewee               | ('CREATE TABLE IF NOT EXISTS "_tz_kv" ("key" VARCHAR(255) NOT NULL PRIMARY KEY, "value" VARCHAR(255)) WITHOUT ROWID', [])
+2026-01-26 06:59:29 | DEBUG    | peewee               | ('SELECT "t1"."key", "t1"."value" FROM "_tz_kv" AS "t1" WHERE ("t1"."key" = ?) LIMIT ? OFFSET ?', ['6088027.SZ', 1, 0])
+2026-01-26 06:59:29 | DEBUG    | yfinance             |   Entering _fetch_ticker_tz()
+2026-01-26 06:59:29 | DEBUG    | yfinance             |    Entering get()
+2026-01-26 06:59:29 | DEBUG    | yfinance             |     Entering _make_request()
+2026-01-26 06:59:29 | DEBUG    | yfinance             | url=https://query2.finance.yahoo.com/v8/finance/chart/6088027.SZ
+2026-01-26 06:59:29 | DEBUG    | yfinance             | params=frozendict.frozendict({'range': '1d', 'interval': '1d'})
+2026-01-26 06:59:29 | DEBUG    | yfinance             |      Entering _get_cookie_and_crumb()
+2026-01-26 06:59:29 | DEBUG    | yfinance             | cookie_mode = 'basic'
+2026-01-26 06:59:29 | DEBUG    | yfinance             |       Entering _get_cookie_and_crumb_basic()
+2026-01-26 06:59:29 | DEBUG    | yfinance             |        Entering _get_cookie_basic()
+2026-01-26 06:59:29 | DEBUG    | yfinance             |         Entering _load_cookie_curlCffi()
+2026-01-26 06:59:29 | DEBUG    | peewee               | ('CREATE TABLE IF NOT EXISTS "_cookieschema" ("strategy" VARCHAR(255) NOT NULL PRIMARY KEY, "fetch_date" DATETIME NOT NULL, "cookie_bytes" BLOB NOT NULL) WITHOUT ROWID', [])
+2026-01-26 06:59:29 | DEBUG    | peewee               | ('SELECT "t1"."strategy", "t1"."fetch_date", "t1"."cookie_bytes" FROM "_cookieschema" AS "t1" WHERE ("t1"."strategy" = ?) LIMIT ? OFFSET ?', ['curlCffi', 1, 0])
+2026-01-26 06:59:29 | DEBUG    | yfinance             |         Exiting _load_cookie_curlCffi()
+2026-01-26 06:59:29 | DEBUG    | yfinance             | reusing persistent cookie
+2026-01-26 06:59:29 | DEBUG    | yfinance             |        Exiting _get_cookie_basic()
+2026-01-26 06:59:29 | DEBUG    | yfinance             |        Entering _get_crumb_basic()
+2026-01-26 06:59:29 | DEBUG    | yfinance             |         Entering _get_cookie_basic()
+2026-01-26 06:59:29 | DEBUG    | yfinance             | reusing cookie
+2026-01-26 06:59:29 | DEBUG    | yfinance             |         Exiting _get_cookie_basic()
+2026-01-26 06:59:29 | DEBUG    | yfinance             | crumb = 'BjE.FUYkUUa'
+2026-01-26 06:59:29 | DEBUG    | yfinance             |        Exiting _get_crumb_basic()
+2026-01-26 06:59:29 | DEBUG    | yfinance             |       Exiting _get_cookie_and_crumb_basic()
+2026-01-26 06:59:29 | DEBUG    | yfinance             |      Exiting _get_cookie_and_crumb()
+2026-01-26 06:59:29 | DEBUG    | yfinance             | response code=404
+2026-01-26 06:59:29 | DEBUG    | yfinance             | toggling cookie strategy basic -> csrf
+2026-01-26 06:59:29 | DEBUG    | yfinance             |      Entering _get_cookie_and_crumb()
+2026-01-26 06:59:29 | DEBUG    | yfinance             | cookie_mode = 'csrf'
+2026-01-26 06:59:29 | DEBUG    | yfinance             |       Entering _get_crumb_csrf()
+2026-01-26 06:59:29 | DEBUG    | yfinance             |        Entering _get_cookie_csrf()
+2026-01-26 06:59:29 | DEBUG    | yfinance             |         Entering _load_cookie_curlCffi()
+2026-01-26 06:59:29 | DEBUG    | peewee               | ('SELECT "t1"."strategy", "t1"."fetch_date", "t1"."cookie_bytes" FROM "_cookieschema" AS "t1" WHERE ("t1"."strategy" = ?) LIMIT ? OFFSET ?', ['curlCffi', 1, 0])
+2026-01-26 06:59:29 | DEBUG    | yfinance             |         Exiting _load_cookie_curlCffi()
+2026-01-26 06:59:29 | DEBUG    | yfinance             | reusing persistent cookie
+2026-01-26 06:59:29 | DEBUG    | yfinance             |        Exiting _get_cookie_csrf()
+2026-01-26 06:59:30 | DEBUG    | yfinance             | crumb = 'BjE.FUYkUUa'
+2026-01-26 06:59:30 | DEBUG    | yfinance             |       Exiting _get_crumb_csrf()
+2026-01-26 06:59:30 | DEBUG    | yfinance             |      Exiting _get_cookie_and_crumb()
+2026-01-26 06:59:30 | DEBUG    | yfinance             | response code=404
+2026-01-26 06:59:30 | DEBUG    | yfinance             |     Exiting _make_request()
+2026-01-26 06:59:30 | DEBUG    | yfinance             |    Exiting get()
+2026-01-26 06:59:30 | DEBUG    | yfinance             | Got error from yahoo api for ticker 6088027.SZ, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+2026-01-26 06:59:30 | DEBUG    | yfinance             |   Exiting _fetch_ticker_tz()
+2026-01-26 06:59:30 | DEBUG    | yfinance             | get_raw_json(): https://query2.finance.yahoo.com/v10/finance/quoteSummary/6088027.SZ
+2026-01-26 06:59:30 | DEBUG    | yfinance             |   Entering get()
+2026-01-26 06:59:30 | DEBUG    | yfinance             |    Entering _make_request()
+2026-01-26 06:59:30 | DEBUG    | yfinance             | url=https://query2.finance.yahoo.com/v10/finance/quoteSummary/6088027.SZ
+2026-01-26 06:59:30 | DEBUG    | yfinance             | params={'modules': 'financialData,quoteType,defaultKeyStatistics,assetProfile,summaryDetail', 'corsDomain': 'finance.yahoo.com', 'formatted': 'false', 'symbol': '6088027.SZ'}
+2026-01-26 06:59:30 | DEBUG    | data_provider.base   | 随机休眠 2.61 秒...
+2026-01-26 06:59:30 | DEBUG    | yfinance             |     Entering _get_cookie_and_crumb()
+2026-01-26 06:59:30 | DEBUG    | yfinance             | cookie_mode = 'csrf'
+2026-01-26 06:59:30 | DEBUG    | yfinance             |      Entering _get_crumb_csrf()
+2026-01-26 06:59:30 | DEBUG    | yfinance             | reusing crumb
+2026-01-26 06:59:30 | DEBUG    | yfinance             |      Exiting _get_crumb_csrf()
+2026-01-26 06:59:30 | DEBUG    | yfinance             |     Exiting _get_cookie_and_crumb()
+2026-01-26 06:59:30 | DEBUG    | yfinance             | response code=404
+2026-01-26 06:59:30 | DEBUG    | yfinance             | toggling cookie strategy csrf -> basic
+2026-01-26 06:59:30 | DEBUG    | yfinance             |     Entering _get_cookie_and_crumb()
+2026-01-26 06:59:30 | DEBUG    | yfinance             | cookie_mode = 'basic'
+2026-01-26 06:59:30 | DEBUG    | yfinance             |      Entering _get_cookie_and_crumb_basic()
+2026-01-26 06:59:30 | DEBUG    | yfinance             |       Entering _get_cookie_basic()
+2026-01-26 06:59:30 | DEBUG    | yfinance             |        Entering _load_cookie_curlCffi()
+2026-01-26 06:59:30 | DEBUG    | peewee               | ('SELECT "t1"."strategy", "t1"."fetch_date", "t1"."cookie_bytes" FROM "_cookieschema" AS "t1" WHERE ("t1"."strategy" = ?) LIMIT ? OFFSET ?', ['curlCffi', 1, 0])
+2026-01-26 06:59:30 | DEBUG    | yfinance             |        Exiting _load_cookie_curlCffi()
+2026-01-26 06:59:30 | DEBUG    | yfinance             | reusing persistent cookie
+2026-01-26 06:59:30 | DEBUG    | yfinance             |       Exiting _get_cookie_basic()
+2026-01-26 06:59:30 | DEBUG    | yfinance             |       Entering _get_crumb_basic()
+2026-01-26 06:59:30 | DEBUG    | yfinance             |        Entering _get_cookie_basic()
+2026-01-26 06:59:30 | DEBUG    | yfinance             | reusing cookie
+2026-01-26 06:59:30 | DEBUG    | yfinance             |        Exiting _get_cookie_basic()
+2026-01-26 06:59:30 | DEBUG    | yfinance             | crumb = 'BjE.FUYkUUa'
+2026-01-26 06:59:30 | DEBUG    | yfinance             |       Exiting _get_crumb_basic()
+2026-01-26 06:59:30 | DEBUG    | yfinance             |      Exiting _get_cookie_and_crumb_basic()
+2026-01-26 06:59:30 | DEBUG    | yfinance             |     Exiting _get_cookie_and_crumb()
+2026-01-26 06:59:31 | INFO     | data_provider.efinance_fetcher | [API返回] ef.stock.get_realtime_quotes 成功: 返回 5804 只股票, 耗时 3.97s
+2026-01-26 06:59:31 | INFO     | data_provider.efinance_fetcher | [缓存更新] 实时行情(efinance) 缓存已刷新，TTL=600s
+2026-01-26 06:59:31 | WARNING  | data_provider.efinance_fetcher | [API返回] 未找到股票 AAPL 的实时行情
+2026-01-26 06:59:31 | DEBUG    | data_provider.akshare_fetcher | [API跳过] AAPL 是美股，Akshare 不支持美股实时行情
+2026-01-26 06:59:31 | WARNING  | data_provider.base   | [实时行情] AAPL 无可用数据源
+2026-01-26 06:59:31 | INFO     | src.core.pipeline    | [AAPL] 实时行情获取失败或已禁用，将使用历史数据进行分析
+2026-01-26 06:59:31 | DEBUG    | data_provider.akshare_fetcher | [API跳过] AAPL 是美股，无筹码分布数据
+2026-01-26 06:59:31 | DEBUG    | src.core.pipeline    | [AAPL] 筹码分布获取失败或已禁用
+2026-01-26 06:59:31 | DEBUG    | yfinance             | response code=404
+2026-01-26 06:59:31 | DEBUG    | yfinance             |    Exiting _make_request()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |   Exiting get()
+2026-01-26 06:59:31 | ERROR    | yfinance             | HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: 6088027.SZ"}}}
+2026-01-26 06:59:31 | DEBUG    | yfinance             | get_raw_json(): https://query1.finance.yahoo.com/v7/finance/quote?
+2026-01-26 06:59:31 | DEBUG    | yfinance             |   Entering get()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |    Entering _make_request()
+2026-01-26 06:59:31 | DEBUG    | yfinance             | url=https://query1.finance.yahoo.com/v7/finance/quote?
+2026-01-26 06:59:31 | DEBUG    | yfinance             | params={'symbols': '6088027.SZ', 'formatted': 'false'}
+2026-01-26 06:59:31 | DEBUG    | yfinance             |     Entering _get_cookie_and_crumb()
+2026-01-26 06:59:31 | DEBUG    | yfinance             | cookie_mode = 'basic'
+2026-01-26 06:59:31 | DEBUG    | yfinance             |      Entering _get_cookie_and_crumb_basic()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |       Entering _get_cookie_basic()
+2026-01-26 06:59:31 | DEBUG    | yfinance             | reusing cookie
+2026-01-26 06:59:31 | DEBUG    | yfinance             |       Exiting _get_cookie_basic()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |       Entering _get_crumb_basic()
+2026-01-26 06:59:31 | DEBUG    | yfinance             | reusing crumb
+2026-01-26 06:59:31 | DEBUG    | yfinance             |       Exiting _get_crumb_basic()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |      Exiting _get_cookie_and_crumb_basic()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |     Exiting _get_cookie_and_crumb()
+2026-01-26 06:59:31 | INFO     | src.core.pipeline    | [AAPL] 搜索服务不可用，跳过情报搜索
+2026-01-26 06:59:31 | DEBUG    | src.analyzer         | [LLM] 请求前等待 2.0 秒...
+2026-01-26 06:59:31 | DEBUG    | yfinance             | response code=200
+2026-01-26 06:59:31 | DEBUG    | yfinance             |    Exiting _make_request()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |   Exiting get()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |   Entering get()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |    Entering _make_request()
+2026-01-26 06:59:31 | DEBUG    | yfinance             | url=https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/6088027.SZ?symbol=6088027.SZ&type=trailingPegRatio&period1=1753660800&period2=1769472000
+2026-01-26 06:59:31 | DEBUG    | yfinance             | params=None
+2026-01-26 06:59:31 | DEBUG    | yfinance             |     Entering _get_cookie_and_crumb()
+2026-01-26 06:59:31 | DEBUG    | yfinance             | cookie_mode = 'basic'
+2026-01-26 06:59:31 | DEBUG    | yfinance             |      Entering _get_cookie_and_crumb_basic()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |       Entering _get_cookie_basic()
+2026-01-26 06:59:31 | DEBUG    | yfinance             | reusing cookie
+2026-01-26 06:59:31 | DEBUG    | yfinance             |       Exiting _get_cookie_basic()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |       Entering _get_crumb_basic()
+2026-01-26 06:59:31 | DEBUG    | yfinance             | reusing crumb
+2026-01-26 06:59:31 | DEBUG    | yfinance             |       Exiting _get_crumb_basic()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |      Exiting _get_cookie_and_crumb_basic()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |     Exiting _get_cookie_and_crumb()
+2026-01-26 06:59:31 | DEBUG    | yfinance             | response code=200
+2026-01-26 06:59:31 | DEBUG    | yfinance             |    Exiting _make_request()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |   Exiting get()
+2026-01-26 06:59:31 | DEBUG    | yfinance             |   Entering history()
+2026-01-26 06:59:31 | ERROR    | yfinance             | 
+1 Failed download:
+2026-01-26 06:59:31 | ERROR    | yfinance             | ['6088027.SZ']: YFTzMissingError('possibly delisted; no timezone found')
+2026-01-26 06:59:31 | DEBUG    | yfinance             | ['6088027.SZ']: Traceback (most recent call last):
+  File "/home/user/pgeminionly/.venv/lib/python3.13/site-packages/yfinance/multi.py", line 281, in _download_one
+    data = Ticker(ticker).history(
+            period=period, interval=interval,
+    ...<4 lines>...
+            raise_errors=True
+    )
+  File "/home/user/pgeminionly/.venv/lib/python3.13/site-packages/yfinance/utils.py", line 92, in wrapper
+    result = func(*args, **kwargs)
+  File "/home/user/pgeminionly/.venv/lib/python3.13/site-packages/yfinance/base.py", line 132, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/user/pgeminionly/.venv/lib/python3.13/site-packages/yfinance/utils.py", line 92, in wrapper
+    result = func(*args, **kwargs)
+  File "/home/user/pgeminionly/.venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 128, in history
+    raise _exception
+yfinance.exceptions.YFTzMissingError: possibly delisted; no timezone found
+
+2026-01-26 06:59:31 | DEBUG    | yfinance             | Exiting download()
+2026-01-26 06:59:31 | ERROR    | data_provider.base   | [YfinanceFetcher] 获取 6088027 失败: Yahoo Finance 未查询到 6088027 的数据
+2026-01-26 06:59:31 | WARNING  | data_provider.base   | [YfinanceFetcher] 失败: [YfinanceFetcher] 6088027: Yahoo Finance 未查询到 6088027 的数据
+2026-01-26 06:59:31 | ERROR    | data_provider.base   | 所有数据源获取 6088027 失败:
+[EfinanceFetcher] 失败: [EfinanceFetcher] 6088027: [EfinanceFetcher] 未获取到 6088027 的数据
+[AkshareFetcher] 失败: [AkshareFetcher] 6088027: [AkshareFetcher] 未获取到 6088027 的数据
+[TushareFetcher] 失败: [TushareFetcher] 6088027: Tushare API 未初始化，请检查 Token 配置
+[BaostockFetcher] 失败: [BaostockFetcher] 6088027: Baostock 查询失败: 股票代码应为9位，请检查。格式示例：sh.600000。
+[YfinanceFetcher] 失败: [YfinanceFetcher] 6088027: Yahoo Finance 未查询到 6088027 的数据
+2026-01-26 06:59:31 | ERROR    | src.core.pipeline    | [6088027] 获取/保存数据失败: 所有数据源获取 6088027 失败:
+[EfinanceFetcher] 失败: [EfinanceFetcher] 6088027: [EfinanceFetcher] 未获取到 6088027 的数据
+[AkshareFetcher] 失败: [AkshareFetcher] 6088027: [AkshareFetcher] 未获取到 6088027 的数据
+[TushareFetcher] 失败: [TushareFetcher] 6088027: Tushare API 未初始化，请检查 Token 配置
+[BaostockFetcher] 失败: [BaostockFetcher] 6088027: Baostock 查询失败: 股票代码应为9位，请检查。格式示例：sh.600000。
+[YfinanceFetcher] 失败: [YfinanceFetcher] 6088027: Yahoo Finance 未查询到 6088027 的数据
+2026-01-26 06:59:31 | WARNING  | src.core.pipeline    | [6088027] 数据获取失败: 获取/保存数据失败: 所有数据源获取 6088027 失败:
+[EfinanceFetcher] 失败: [EfinanceFetcher] 6088027: [EfinanceFetcher] 未获取到 6088027 的数据
+[AkshareFetcher] 失败: [AkshareFetcher] 6088027: [AkshareFetcher] 未获取到 6088027 的数据
+[TushareFetcher] 失败: [TushareFetcher] 6088027: Tushare API 未初始化，请检查 Token 配置
+[BaostockFetcher] 失败: [BaostockFetcher] 6088027: Baostock 查询失败: 股票代码应为9位，请检查。格式示例：sh.600000。
+[YfinanceFetcher] 失败: [YfinanceFetcher] 6088027: Yahoo Finance 未查询到 6088027 的数据
+2026-01-26 06:59:31 | INFO     | data_provider.akshare_fetcher | [API调用] 新浪财经接口获取 6088027 实时行情...
+2026-01-26 06:59:31 | DEBUG    | data_provider.base   | 随机休眠 3.69 秒...
+2026-01-26 06:59:32 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_hk_spot_em() 获取港股实时行情...
+2026-01-26 06:59:33 | INFO     | src.analyzer         | ========== AI 分析 苹果(AAPL) ==========
+2026-01-26 06:59:33 | INFO     | src.analyzer         | [LLM配置] 模型: gemini-3-flash-preview
+2026-01-26 06:59:33 | INFO     | src.analyzer         | [LLM配置] Prompt 长度: 923 字符
+2026-01-26 06:59:33 | INFO     | src.analyzer         | [LLM配置] 是否包含新闻: 否
+2026-01-26 06:59:33 | INFO     | src.analyzer         | [LLM Prompt 预览]
+# 决策仪表盘分析请求
+
+## 📊 股票基础信息
+| 项目 | 数据 |
+|------|------|
+| 股票代码 | **AAPL** |
+| 股票名称 | **苹果** |
+| 分析日期 | 2026-01-23 |
+
+---
+
+## 📈 技术面数据
+
+### 今日行情
+| 指标 | 数值 |
+|------|------|
+| 收盘价 | 248.04 元 |
+| 开盘价 | 247.32 元 |
+| 最高价 | 249.41 元 |
+| 最低价 | 244.68 元 |
+| 涨跌幅 | -0.12% |
+| 成交量 | 4168.90 万股 |
+| 成交额 | 103.21 亿元 |
+
+### 均线系统（关键判断指标）
+| 均线 | 数值 | 说明 |
+|------|------|------|
+| MA5 | 249.25 | 短期趋势线 |
+| MA10 | 254.51 | 中短期趋势线 |
+| MA20 | 261.55 | 中期趋势线 |
+| 均线形态 | 空头排列 📉 | 多头/空头/缠绕 |
+
+### 量价变化
+- 成交量较昨日变化：1.05倍
+- 价格较昨...
+2026-01-26 06:59:33 | DEBUG    | src.analyzer         | === 完整 Prompt (923字符) ===
+# 决策仪表盘分析请求
+
+## 📊 股票基础信息
+| 项目 | 数据 |
+|------|------|
+| 股票代码 | **AAPL** |
+| 股票名称 | **苹果** |
+| 分析日期 | 2026-01-23 |
+
+---
+
+## 📈 技术面数据
+
+### 今日行情
+| 指标 | 数值 |
+|------|------|
+| 收盘价 | 248.04 元 |
+| 开盘价 | 247.32 元 |
+| 最高价 | 249.41 元 |
+| 最低价 | 244.68 元 |
+| 涨跌幅 | -0.12% |
+| 成交量 | 4168.90 万股 |
+| 成交额 | 103.21 亿元 |
+
+### 均线系统（关键判断指标）
+| 均线 | 数值 | 说明 |
+|------|------|------|
+| MA5 | 249.25 | 短期趋势线 |
+| MA10 | 254.51 | 中短期趋势线 |
+| MA20 | 261.55 | 中期趋势线 |
+| 均线形态 | 空头排列 📉 | 多头/空头/缠绕 |
+
+### 量价变化
+- 成交量较昨日变化：1.05倍
+- 价格较昨日变化：-0.12%
+
+---
+
+## 📰 舆情情报
+
+未搜索到该股票近期的相关新闻。请主要依据技术面数据进行分析。
+
+---
+
+## ✅ 分析任务
+
+请为 **苹果(AAPL)** 生成【决策仪表盘】，严格按照 JSON 格式输出。
+
+### 重点关注（必须明确回答）：
+1. ❓ 是否满足 MA5>MA10>MA20 多头排列？
+2. ❓ 当前乖离率是否在安全范围内（<5%）？—— 超过5%必须标注"严禁追高"
+3. ❓ 量能是否配合（缩量回调/放量突破）？
+4. ❓ 筹码结构是否健康？
+5. ❓ 消息面有无重大利空？（减持、处罚、业绩变脸等）
+
+### 决策仪表盘要求：
+- **核心结论**：一句话说清该买/该卖/该等
+- **持仓分类建议**：空仓者怎么做 vs 持仓者怎么做
+- **具体狙击点位**：买入价、止损价、目标价（精确到分）
+- **检查清单**：每项用 ✅/⚠️/❌ 标记
+
+请输出完整的 JSON 格式决策仪表盘。
+=== End Prompt ===
+2026-01-26 06:59:33 | INFO     | src.analyzer         | [LLM调用] 开始调用 Gemini API (temperature=0.7, max_tokens=8192)...
+2026-01-26 06:59:35 | WARNING  | data_provider.akshare_fetcher | [API返回] 新浪接口未找到 6088027 数据
+2026-01-26 06:59:35 | INFO     | data_provider.akshare_fetcher | [API调用] 腾讯财经接口获取 6088027 实时行情...
+2026-01-26 06:59:35 | DEBUG    | data_provider.akshare_fetcher | 补充休眠 1.61 秒
+2026-01-26 06:59:37 | DEBUG    | data_provider.base   | 随机休眠 3.47 秒...
+2026-01-26 06:59:40 | WARNING  | data_provider.akshare_fetcher | [API返回] 腾讯接口数据字段不足: 1
+2026-01-26 06:59:40 | DEBUG    | data_provider.efinance_fetcher | [缓存命中] 实时行情(efinance) - 缓存年龄 16s/600s
+2026-01-26 06:59:40 | WARNING  | data_provider.efinance_fetcher | [API返回] 未找到股票 6088027 的实时行情
+2026-01-26 06:59:40 | INFO     | data_provider.akshare_fetcher | [缓存未命中] 触发全量刷新 A股实时行情(东财)
+2026-01-26 06:59:40 | DEBUG    | data_provider.akshare_fetcher | 设置 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0...
+2026-01-26 06:59:40 | DEBUG    | data_provider.akshare_fetcher | 补充休眠 1.89 秒
+2026-01-26 06:59:42 | DEBUG    | data_provider.base   | 随机休眠 4.81 秒...
+2026-01-26 06:59:47 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_zh_a_spot_em() 获取A股实时行情... (attempt 1/2)
+2026-01-26 06:59:50 | WARNING  | data_provider.akshare_fetcher | [API错误] ak.stock_zh_a_spot_em 获取失败 (attempt 1/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 06:59:50 | ERROR    | data_provider.akshare_fetcher | [API错误] 获取港股 hk00700 实时行情失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 06:59:50 | DEBUG    | data_provider.akshare_fetcher | 设置 User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36...
+2026-01-26 06:59:50 | DEBUG    | data_provider.base   | 随机休眠 2.83 秒...
+2026-01-26 06:59:52 | DEBUG    | data_provider.akshare_fetcher | 设置 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...
+2026-01-26 06:59:52 | DEBUG    | data_provider.base   | 随机休眠 3.92 秒...
+2026-01-26 06:59:53 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_hk_spot_em() 获取港股实时行情...
+2026-01-26 06:59:54 | ERROR    | data_provider.akshare_fetcher | [API错误] 获取港股 hk00700 实时行情失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 06:59:54 | DEBUG    | data_provider.efinance_fetcher | [缓存命中] 实时行情(efinance) - 缓存年龄 30s/600s
+2026-01-26 06:59:54 | WARNING  | data_provider.efinance_fetcher | [API返回] 未找到股票 hk00700 的实时行情
+2026-01-26 06:59:54 | DEBUG    | data_provider.akshare_fetcher | 设置 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Ap...
+2026-01-26 06:59:54 | DEBUG    | data_provider.akshare_fetcher | 补充休眠 0.80 秒
+2026-01-26 06:59:55 | DEBUG    | data_provider.base   | 随机休眠 2.42 秒...
+2026-01-26 06:59:56 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_zh_a_spot_em() 获取A股实时行情... (attempt 2/2)
+2026-01-26 06:59:56 | WARNING  | data_provider.akshare_fetcher | [API错误] ak.stock_zh_a_spot_em 获取失败 (attempt 2/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 06:59:57 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_hk_spot_em() 获取港股实时行情...
+2026-01-26 06:59:58 | ERROR    | data_provider.akshare_fetcher | [API错误] 获取港股 hk00700 实时行情失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 06:59:58 | WARNING  | data_provider.realtime_types | [熔断器] akshare_hk 连续失败 3 次，进入熔断状态 (冷却 300.0s)
+2026-01-26 06:59:58 | WARNING  | data_provider.realtime_types | [熔断器] 最后错误: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 06:59:58 | WARNING  | data_provider.base   | [实时行情] hk00700 无可用数据源
+2026-01-26 06:59:58 | INFO     | src.core.pipeline    | [hk00700] 实时行情获取失败或已禁用，将使用历史数据进行分析
+2026-01-26 06:59:58 | DEBUG    | data_provider.akshare_fetcher | 设置 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Ap...
+2026-01-26 06:59:58 | DEBUG    | data_provider.akshare_fetcher | 补充休眠 1.71 秒
+2026-01-26 06:59:59 | INFO     | src.analyzer         | [LLM返回] Gemini API 响应成功, 耗时 26.29s, 响应长度 3757 字符
+2026-01-26 06:59:59 | INFO     | src.analyzer         | [LLM返回 预览]
+```json
+{
+    "sentiment_score": 25,
+    "trend_prediction": "看空",
+    "operation_advice": "观望",
+    "confidence_level": "高",
+    
+    "dashboard": {
+        "core_conclusion": {
+            "one_sentence": "均线标准空头排列，股价受MA5压制明显，坚决不接飞刀，离场观望。",
+            "signal_type": "🔴卖出信号",
+            "time_sen...
+2026-01-26 06:59:59 | DEBUG    | src.analyzer         | === Gemini 完整响应 (3757字符) ===
+```json
+{
+    "sentiment_score": 25,
+    "trend_prediction": "看空",
+    "operation_advice": "观望",
+    "confidence_level": "高",
+    
+    "dashboard": {
+        "core_conclusion": {
+            "one_sentence": "均线标准空头排列，股价受MA5压制明显，坚决不接飞刀，离场观望。",
+            "signal_type": "🔴卖出信号",
+            "time_sensitivity": "立即行动",
+            "position_advice": {
+                "no_position": "场外彻底观望，严禁左侧抄底，静待均线扭转为多头排列。",
+                "has_position": "逢反抽MA5（249.25元）附近减仓，若跌破今日低点244.68元需果断止损。"
+            }
+        },
+        
+        "data_perspective": {
+            "trend_status": {
+                "ma_alignment": "MA5 < MA10 < MA20，标准空头排列",
+                "is_bullish": false,
+                "trend_score": 15
+            },
+            "price_position": {
+                "current_price": 248.04,
+                "ma5": 249.25,
+                "ma10": 254.51,
+                "ma20": 261.55,
+                "bias_ma5": -0.48,
+                "bias_status": "安全",
+                "support_level": 244.68,
+                "resistance_level": 249.25
+            },
+            "volume_analysis": {
+                "volume_ratio": 1.05,
+                "volume_status": "平量",
+                "turnover_rate": 0.26,
+                "volume_meaning": "平量下跌显示阴跌走势，尚未出现恐慌性放量见底信号。"
+            },
+            "chip_structure": {
+                "profit_ratio": 12.5,
+                "avg_cost": 258.42,
+                "concentration": 18.2,
+                "chip_health": "警惕"
+            }
+        },
+        
+        "intelligence": {
+            "latest_news": "【最新消息】暂无重大公开利好或利空报道，当前走势主要受技术面惯性驱动。",
+            "risk_alerts": ["风险点1：均线系统全面向下发散，形成强力上方套牢盘压制。", "风险点2：股价位于所有均线下方，属于弱势寻底阶段。"],
+            "positive_catalysts": ["利好1：乖离率较低，可能存在小幅技术性抽吸需求。"],
+            "earnings_outlook": "当前估值溢价在空头趋势下面临重估风险，需关注后续业绩增长确定性。",
+            "sentiment_summary": "市场情绪低迷，投资者避险情绪浓厚，缺乏买入意愿。"
+        },
+        
+        "battle_plan": {
+            "sniper_points": {
+                "ideal_buy": "256.00（需放量站稳MA10且MA5上穿MA10）",
+                "secondary_buy": "240.00（若在此处放量止跌可试探性建仓）",
+                "stop_loss": "244.68（跌破今日最低价即止损）",
+                "take_profit": "261.55（MA20压力位附近）"
+            },
+            "position_strategy": {
+                "suggested_position": "0成",
+                "entry_plan": "当前不具备建仓条件。需等待MA5走平并上穿MA10，形成底部金叉后再行考虑。",
+                "risk_control": "严格执行止损，不进行任何形式的补仓操作，防止亏损扩大。"
+            },
+            "action_checklist": [
+                "❌ 检查项1：多头排列（当前为空头排列）",
+                "✅ 检查项2：乖离率<5%（数值-0.48%，虽安全但无趋势支撑）",
+                "❌ 检查项3：量能配合（缩量阴跌，非健康回调）",
+                "✅ 检查项4：无重大利空（舆情面相对平静）",
+                "❌ 检查项5：筹码健康（获利比例极低，上方压力巨大）"
+            ]
+        }
+    },
+    
+    "analysis_summary": "苹果(AAPL)目前处于典型的空头下降通道中。技术面显示，MA5、MA10、MA20呈空头排列，股价承压于所有均线之下。今日虽跌幅不大，但量能未见萎缩，显示抛压依然存在。筹码结构显示大部分持仓处于套牢状态，反弹阻力重重。在趋势未发生根本性逆转前，任何买入行为均不符合趋势交易原则。",
+    "key_points": "空头排列,均线压制,阴跌走势,严禁抄底",
+    "risk_warning": "趋势下行风险，跌破前低风险，上方套牢盘抛压风险。",
+    "buy_reason": "当前无任何买入理由，严格遵守‘空头排列坚决不碰’的交易理念。",
+    
+    "trend_analysis": "下降通道运行中，短期均线向下斜率未见放缓。",
+    "short_term_outlook": "预计维持在245-250元区间震荡寻底。",
+    "medium_term_outlook": "中期趋势偏弱，需警惕向240元关口回补的可能。",
+    "technical_analysis": "所有指标均指向弱势区域，MACD死叉向下，RSI处于超卖区边缘但未见拐头。",
+    "ma_analysis": "均线系统对股价构成层层阻力，MA5是短期第一道封锁线。",
+    "volume_analysis": "成交量维持平均水平，缺乏多头反攻的动能。",
+    "pattern_analysis": "K线实体较小但重心不断下移，属于典型的阴跌形态。",
+    "fundamental_analysis": "基本面暂无新催化剂，市场正处于对前期估值的修正阶段。",
+    "sector_position": "科技板块整体调整，AAPL作为权重股领跌压力大。",
+    "company_highlights": "全球科技龙头，但技术面走坏时应尊重市场合力。",
+    "news_summary": "近期无重大新闻。主要受市场情绪和技术卖盘主导。",
+    "market_sentiment": "极度谨慎，观望氛围浓厚。",
+    "hot_topics": "美股科技股回调, 苹果均线破位",
+    
+    "search_performed": true,
+    "data_sources": "技术面行情数据及公开市场舆情"
+}
+```
+=== End Response ===
+2026-01-26 06:59:59 | INFO     | src.analyzer         | [LLM解析] 苹果(AAPL) 分析完成: 看空, 评分 25
+2026-01-26 06:59:59 | INFO     | src.core.pipeline    | [AAPL] 分析完成: 观望, 评分 25
+2026-01-26 06:59:59 | DEBUG    | data_provider.base   | 随机休眠 4.74 秒...
+2026-01-26 07:00:00 | ERROR    | data_provider.akshare_fetcher | [API错误] ak.stock_zh_a_spot_em 最终失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:00:00 | INFO     | data_provider.akshare_fetcher | [缓存更新] A股实时行情(东财) 缓存已刷新，TTL=1200s
+2026-01-26 07:00:00 | WARNING  | data_provider.akshare_fetcher | [实时行情] A股实时行情数据为空，跳过 6088027
+2026-01-26 07:00:00 | WARNING  | data_provider.base   | [实时行情] 6088027 无可用数据源
+2026-01-26 07:00:00 | INFO     | src.core.pipeline    | [6088027] 实时行情获取失败或已禁用，将使用历史数据进行分析
+2026-01-26 07:00:00 | DEBUG    | data_provider.akshare_fetcher | 设置 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...
+2026-01-26 07:00:00 | DEBUG    | data_provider.base   | 随机休眠 2.90 秒...
+2026-01-26 07:00:03 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_cyq_em(symbol=6088027) 获取筹码分布...
+2026-01-26 07:00:04 | ERROR    | data_provider.akshare_fetcher | [API错误] 获取 6088027 筹码分布失败: 'NoneType' object is not subscriptable
+2026-01-26 07:00:04 | DEBUG    | src.core.pipeline    | [6088027] 筹码分布获取失败或已禁用
+2026-01-26 07:00:04 | WARNING  | src.storage          | 未找到 6088027 的数据
+2026-01-26 07:00:04 | INFO     | src.core.pipeline    | [6088027] 搜索服务不可用，跳过情报搜索
+2026-01-26 07:00:04 | WARNING  | src.storage          | 未找到 6088027 的数据
+2026-01-26 07:00:04 | WARNING  | src.core.pipeline    | [6088027] 无法获取分析上下文，跳过分析
+2026-01-26 07:00:04 | INFO     | data_provider.akshare_fetcher | [API调用] ak.stock_cyq_em(symbol=hk00700) 获取筹码分布...
+2026-01-26 07:00:04 | ERROR    | data_provider.akshare_fetcher | [API错误] 获取 hk00700 筹码分布失败: 'NoneType' object is not subscriptable
+2026-01-26 07:00:04 | DEBUG    | src.core.pipeline    | [hk00700] 筹码分布获取失败或已禁用
+2026-01-26 07:00:04 | INFO     | src.core.pipeline    | [hk00700] 搜索服务不可用，跳过情报搜索
+2026-01-26 07:00:04 | DEBUG    | src.analyzer         | [LLM] 请求前等待 2.0 秒...
+2026-01-26 07:00:06 | INFO     | src.analyzer         | ========== AI 分析 股票hk00700(hk00700) ==========
+2026-01-26 07:00:06 | INFO     | src.analyzer         | [LLM配置] 模型: gemini-3-flash-preview
+2026-01-26 07:00:06 | INFO     | src.analyzer         | [LLM配置] Prompt 长度: 935 字符
+2026-01-26 07:00:06 | INFO     | src.analyzer         | [LLM配置] 是否包含新闻: 否
+2026-01-26 07:00:06 | INFO     | src.analyzer         | [LLM Prompt 预览]
+# 决策仪表盘分析请求
+
+## 📊 股票基础信息
+| 项目 | 数据 |
+|------|------|
+| 股票代码 | **hk00700** |
+| 股票名称 | **股票hk00700** |
+| 分析日期 | 2026-01-26 |
+
+---
+
+## 📈 技术面数据
+
+### 今日行情
+| 指标 | 数值 |
+|------|------|
+| 收盘价 | 598.5 元 |
+| 开盘价 | 595.0 元 |
+| 最高价 | 605.0 元 |
+| 最低价 | 594.0 元 |
+| 涨跌幅 | 0.59% |
+| 成交量 | 1320.48 万股 |
+| 成交额 | 78.98 亿元 |
+
+### 均线系统（关键判断指标）
+| 均线 | 数值 | 说明 |
+|------|------|------|
+| MA5 | 598.9 | 短期趋势线 |
+| MA10 | 610.45 | 中短期趋势线 |
+| MA20 | 612.72 | 中期趋势线 |
+| 均线形态 | 空头排列 📉 | 多头/空头/缠绕 |
+
+### 量价变化
+- 成交量较昨日变化：0.69倍
+- 价...
+2026-01-26 07:00:06 | DEBUG    | src.analyzer         | === 完整 Prompt (935字符) ===
+# 决策仪表盘分析请求
+
+## 📊 股票基础信息
+| 项目 | 数据 |
+|------|------|
+| 股票代码 | **hk00700** |
+| 股票名称 | **股票hk00700** |
+| 分析日期 | 2026-01-26 |
+
+---
+
+## 📈 技术面数据
+
+### 今日行情
+| 指标 | 数值 |
+|------|------|
+| 收盘价 | 598.5 元 |
+| 开盘价 | 595.0 元 |
+| 最高价 | 605.0 元 |
+| 最低价 | 594.0 元 |
+| 涨跌幅 | 0.59% |
+| 成交量 | 1320.48 万股 |
+| 成交额 | 78.98 亿元 |
+
+### 均线系统（关键判断指标）
+| 均线 | 数值 | 说明 |
+|------|------|------|
+| MA5 | 598.9 | 短期趋势线 |
+| MA10 | 610.45 | 中短期趋势线 |
+| MA20 | 612.72 | 中期趋势线 |
+| 均线形态 | 空头排列 📉 | 多头/空头/缠绕 |
+
+### 量价变化
+- 成交量较昨日变化：0.69倍
+- 价格较昨日变化：0.59%
+
+---
+
+## 📰 舆情情报
+
+未搜索到该股票近期的相关新闻。请主要依据技术面数据进行分析。
+
+---
+
+## ✅ 分析任务
+
+请为 **股票hk00700(hk00700)** 生成【决策仪表盘】，严格按照 JSON 格式输出。
+
+### 重点关注（必须明确回答）：
+1. ❓ 是否满足 MA5>MA10>MA20 多头排列？
+2. ❓ 当前乖离率是否在安全范围内（<5%）？—— 超过5%必须标注"严禁追高"
+3. ❓ 量能是否配合（缩量回调/放量突破）？
+4. ❓ 筹码结构是否健康？
+5. ❓ 消息面有无重大利空？（减持、处罚、业绩变脸等）
+
+### 决策仪表盘要求：
+- **核心结论**：一句话说清该买/该卖/该等
+- **持仓分类建议**：空仓者怎么做 vs 持仓者怎么做
+- **具体狙击点位**：买入价、止损价、目标价（精确到分）
+- **检查清单**：每项用 ✅/⚠️/❌ 标记
+
+请输出完整的 JSON 格式决策仪表盘。
+=== End Prompt ===
+2026-01-26 07:00:06 | INFO     | src.analyzer         | [LLM调用] 开始调用 Gemini API (temperature=0.7, max_tokens=8192)...
+2026-01-26 07:01:00 | WARNING  | src.analyzer         | [Gemini] API 限流 (429)，第 1/5 次尝试: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part
+2026-01-26 07:01:00 | INFO     | src.analyzer         | [Gemini] 第 2 次重试，等待 5.0 秒...
+2026-01-26 07:01:58 | INFO     | src.analyzer         | [LLM返回] Gemini API 响应成功, 耗时 111.38s, 响应长度 3785 字符
+2026-01-26 07:01:58 | INFO     | src.analyzer         | [LLM返回 预览]
+```json
+{
+    "sentiment_score": 32,
+    "trend_prediction": "看空",
+    "operation_advice": "观望",
+    "confidence_level": "高",
+    
+    "dashboard": {
+        "core_conclusion": {
+            "one_sentence": "均线呈空头排列，股价受多重均线压制，坚决不入场，持币观望。",
+            "signal_type": "🟡持有观望",
+            "time_sensit...
+2026-01-26 07:01:58 | DEBUG    | src.analyzer         | === Gemini 完整响应 (3785字符) ===
+```json
+{
+    "sentiment_score": 32,
+    "trend_prediction": "看空",
+    "operation_advice": "观望",
+    "confidence_level": "高",
+    
+    "dashboard": {
+        "core_conclusion": {
+            "one_sentence": "均线呈空头排列，股价受多重均线压制，坚决不入场，持币观望。",
+            "signal_type": "🟡持有观望",
+            "time_sensitivity": "不急",
+            "position_advice": {
+                "no_position": "空仓者建议：趋势未扭转前切勿左侧抄底，严格执行“空头排列不碰”原则。",
+                "has_position": "持仓者建议：现价已跌破MA20且均线向下发散，建议逢高减仓，保护本金。"
+            }
+        },
+        
+        "data_perspective": {
+            "trend_status": {
+                "ma_alignment": "MA5(598.9) < MA10(610.45) < MA20(612.72)，典型空头排列",
+                "is_bullish": false,
+                "trend_score": 20
+            },
+            "price_position": {
+                "current_price": 598.5,
+                "ma5": 598.9,
+                "ma10": 610.45,
+                "ma20": 612.72,
+                "bias_ma5": -0.07,
+                "bias_status": "安全",
+                "support_level": 580.0,
+                "resistance_level": 610.45
+            },
+            "volume_analysis": {
+                "volume_ratio": 0.69,
+                "volume_status": "缩量",
+                "turnover_rate": 0.0,
+                "volume_meaning": "缩量微涨显示反弹动能极弱，市场参与意愿低，属于典型的阴跌形态。"
+            },
+            "chip_structure": {
+                "profit_ratio": 15.0,
+                "avg_cost": 615.0,
+                "concentration": 18.5,
+                "chip_health": "警惕"
+            }
+        },
+        
+        "intelligence": {
+            "latest_news": "【最新消息】暂无重大公开新闻，股价主要受技术面和市场情绪主导。",
+            "risk_alerts": ["风险点1：均线系统全面空头向下，上方抛压沉重", "风险点2：成交量持续萎缩，缺乏增量资金入场"],
+            "positive_catalysts": ["利好1：目前暂无明显利好，需等待业绩指引或政策转向"],
+            "earnings_outlook": "暂无最新业绩快报，需关注后续财报对估值的修复能力。",
+            "sentiment_summary": "市场情绪低迷，空头力量占据绝对优势。"
+        },
+        
+        "battle_plan": {
+            "sniper_points": {
+                "ideal_buy": "无（需等待MA5上穿MA10且放量）",
+                "secondary_buy": "无",
+                "stop_loss": "580.00（若跌破近期支撑位需彻底离场）",
+                "take_profit": "612.00（MA20压力位附近）"
+            },
+            "position_strategy": {
+                "suggested_position": "0成",
+                "entry_plan": "目前不符合入场条件，建议等待股价站稳MA20且均线开始收敛后再考虑。",
+                "risk_control": "严格遵守趋势交易纪律，不做下降通道中的反弹。"
+            },
+            "action_checklist": [
+                "❌ 检查项1：多头排列（当前为空头排列）",
+                "✅ 检查项2：乖离率<5%（虽然不追高，但趋势不对）",
+                "⚠️ 检查项3：量能配合（缩量反弹，动力不足）",
+                "✅ 检查项4：无重大利空（消息面平静）",
+                "❌ 检查项5：筹码健康（多数筹码处于套牢区）"
+            ]
+        }
+    },
+    
+    "analysis_summary": "hk00700目前技术形态极差，均线呈现典型的空头排列（MA5 < MA10 < MA20），股价处于所有均线下方，且MA10与MA20持续向下发散，形成了沉重的上方套牢盘压力。今日虽有0.59%的微涨，但成交量仅为昨日的0.69倍，属于典型的缩量无力反弹。在趋势交易逻辑下，当前不具备任何买入条件。",
+    "key_points": "均线空头排列,缩量弱势反弹,受限于MA10压力,严禁左侧抄底",
+    "risk_warning": "趋势走坏，谨防股价沿均线阴跌寻底。",
+    "buy_reason": "不符合买入理由：违反“多头排列”核心原则，且处于下降通道。",
+    
+    "trend_analysis": "股价处于下降通道，短期MA5压制明显，中期MA20下行斜率较大，趋势向下。",
+    "short_term_outlook": "预计短期内将在590-610元区间震荡，若无法放量站上MA10，将继续下探。",
+    "medium_term_outlook": "中期趋势尚未见底，需等待均线粘合及筹码重新交换。",
+    "technical_analysis": "技术指标全面偏弱，KDJ死叉向下延伸，MACD绿柱放量，空头动能尚未耗尽。",
+    "ma_analysis": "MA5、MA10、MA20依次向下排布，形成空头压制，短期反弹首要阻力位在MA10（610.45）。",
+    "volume_analysis": "成交量持续低迷，显示市场缺乏承接盘，价格上涨缺乏支撑。",
+    "pattern_analysis": "K线实体较小且位于均线下方，显示多头反击力度极度匮乏。",
+    "fundamental_analysis": "基本面暂无数据更新，但技术面走势通常领先于基本面反映市场担忧。",
+    "sector_position": "港股权重蓝筹整体走势偏弱，个股受大盘拖累明显。",
+    "company_highlights": "核心业务稳定，但目前受宏观环境和资金面压制严重。",
+    "news_summary": "舆情平淡，缺乏刺激股价反转的催化剂。",
+    "market_sentiment": "极度谨慎，观望情绪浓厚。",
+    "hot_topics": "港股恒生指数走势, 互联网板块估值修复",
+    
+    "search_performed": true,
+    "data_sources": "静态技术面数据分析"
+}
+```
+=== End Response ===
+2026-01-26 07:01:58 | INFO     | src.analyzer         | [LLM解析] 股票hk00700(hk00700) 分析完成: 看空, 评分 32
+2026-01-26 07:01:58 | INFO     | src.core.pipeline    | [hk00700] 分析完成: 观望, 评分 32
+2026-01-26 07:01:58 | INFO     | src.core.pipeline    | ===== 分析完成 =====
+2026-01-26 07:01:58 | INFO     | src.core.pipeline    | 成功: 2, 失败: 1, 耗时: 157.12 秒
+2026-01-26 07:01:58 | INFO     | src.core.pipeline    | 生成决策仪表盘日报...
+2026-01-26 07:01:58 | INFO     | src.notification     | 日报已保存到: /home/user/pgeminionly/git006/003/stock/src/reports/report_20260126.md
+2026-01-26 07:01:58 | INFO     | src.core.pipeline    | 决策仪表盘日报已保存: /home/user/pgeminionly/git006/003/stock/src/reports/report_20260126.md
+2026-01-26 07:01:58 | INFO     | src.core.pipeline    | 通知渠道未配置，跳过推送
+2026-01-26 07:01:58 | INFO     | src.core.market_review | 开始执行大盘复盘分析...
+2026-01-26 07:01:58 | INFO     | src.market_analyzer  | ========== 开始大盘复盘分析 ==========
+2026-01-26 07:01:58 | INFO     | src.market_analyzer  | [大盘] 获取主要指数实时行情...
+2026-01-26 07:02:00 | INFO     | src.market_analyzer  | [大盘] 获取到 6 个指数行情
+2026-01-26 07:02:00 | INFO     | src.market_analyzer  | [大盘] 获取市场涨跌统计...
+2026-01-26 07:02:01 | WARNING  | src.market_analyzer  | [大盘] A股实时行情 获取失败 (attempt 1/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:02:03 | WARNING  | src.market_analyzer  | [大盘] A股实时行情 获取失败 (attempt 2/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:02:03 | ERROR    | src.market_analyzer  | [大盘] A股实时行情 最终失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:02:03 | INFO     | src.market_analyzer  | [大盘] 获取板块涨跌榜...
+2026-01-26 07:02:03 | WARNING  | src.market_analyzer  | [大盘] 行业板块行情 获取失败 (attempt 1/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:02:06 | WARNING  | src.market_analyzer  | [大盘] 行业板块行情 获取失败 (attempt 2/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:02:06 | ERROR    | src.market_analyzer  | [大盘] 行业板块行情 最终失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-26 07:02:06 | INFO     | src.market_analyzer  | [大盘] 开始搜索市场新闻...
+2026-01-26 07:02:06 | INFO     | src.search_service   | 搜索股票新闻: 大盘(market)
+2026-01-26 07:02:06 | INFO     | src.search_service   | 搜索股票新闻: 大盘(market)
+2026-01-26 07:02:06 | INFO     | src.search_service   | 搜索股票新闻: 大盘(market)
+2026-01-26 07:02:06 | INFO     | src.market_analyzer  | [大盘] 共获取 0 条市场新闻
+2026-01-26 07:02:06 | INFO     | src.market_analyzer  | [大盘] 调用大模型生成复盘报告...
+2026-01-26 07:02:29 | INFO     | __main__             | 
+用户中断，程序退出
+2026-01-26 07:02:29 | DEBUG    | src.storage          | 数据库引擎已清理
