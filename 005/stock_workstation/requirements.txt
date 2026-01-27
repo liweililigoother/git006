@@ -1,0 +1,6 @@
+streamlit
+akshare
+plotly
+pandas
+scipy # For DTW algorithm
+numpy # For data manipulation
